@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProjectShiraz">
         <activity
+            android:name=".AnimalDetails"
+            android:exported="false" />
+        <activity
             android:name=".Report"
             android:exported="false" />
         <activity
