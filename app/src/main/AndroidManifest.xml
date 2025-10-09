@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProjectShiraz">
         <activity
+            android:name=".Adoption"
+            android:exported="false" />
+        <activity
             android:name=".Map"
             android:exported="false" />
         <activity
