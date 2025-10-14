@@ -7,4 +7,152 @@
     android:layout_height="match_parent"
     tools:context=".Signup">
 
+    <EditText
+        android:id="@+id/editTextTextEmailAddress"
+        android:layout_width="394dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="220dp" />
+
+    <EditText
+        android:id="@+id/editTextNumberPassword"
+        android:layout_width="392dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="password"
+        android:inputType="numberPassword"
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="415dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="392dp"
+        android:layout_height="52dp"
+        android:backgroundTint="#A61414"
+        android:text="Create an account"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="493dp" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="207dp"
+        android:layout_height="57dp"
+        android:text="Create Account"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="181dp"
+        android:layout_height="27dp"
+        android:text="Sign up to get started"
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="58dp" />
+
+    <EditText
+        android:id="@+id/editTextText2"
+        android:layout_width="383dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="Enter First and Last Name"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="137dp" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="115dp" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email Adress"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="198dp" />
+
+    <EditText
+        android:id="@+id/editTextNumberPassword2"
+        android:layout_width="388dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:hint="+972"
+        android:inputType="numberPassword"
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="311dp" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="297dp" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="393dp" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OR"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="182dp"
+        tools:layout_editor_absoluteY="557dp" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign up with "
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="149dp"
+        tools:layout_editor_absoluteY="592dp" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#160801"
+        android:text="Google"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="622dp" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#0D0101"
+        android:backgroundTintMode="src_atop"
+        android:text="facebook"
+        tools:layout_editor_absoluteX="253dp"
+        tools:layout_editor_absoluteY="622dp" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="267dp"
+        android:layout_height="38dp"
+        android:text="Already have an accout?Login"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="103dp"
+        tools:layout_editor_absoluteY="677dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
