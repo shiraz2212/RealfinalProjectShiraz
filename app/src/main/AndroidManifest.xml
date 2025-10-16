@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProjectShiraz">
         <activity
+            android:name=".SplahScreen1"
+            android:exported="false" />
+        <activity
             android:name=".LogIn1"
             android:exported="false" />
         <activity

@@ -34,10 +34,4 @@
         tools:layout_editor_absoluteY="246dp"
         tools:text="phone number" />
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="176dp"
-        tools:layout_editor_absoluteY="322dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

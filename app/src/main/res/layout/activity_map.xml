@@ -7,4 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".Map">
 
+    <EditText
+        android:id="@+id/editTextText10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="97dp"
+        tools:layout_editor_absoluteY="50dp" />
+
+    <SearchView
+        android:layout_width="32dp"
+        android:layout_height="12dp"
+        tools:layout_editor_absoluteX="105dp"
+        tools:layout_editor_absoluteY="62dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

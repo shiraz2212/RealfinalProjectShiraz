@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SplahScreen1">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="568dp"
+        android:layout_height="968dp"
+        app:srcCompat="@mipmap/ic_launcher_foreground"
+        tools:layout_editor_absoluteX="-96dp"
+        tools:layout_editor_absoluteY="-179dp" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:text="Saving one animal can change a world"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="612dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
