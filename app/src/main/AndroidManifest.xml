@@ -11,11 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProjectShiraz">
+
         <activity
-            android:name=".SplahScreen1"
-            android:exported="false" />
-        <activity
-            android:name=".LogIn1"
+            android:name=".LogIn"
             android:exported="false" />
         <activity
             android:name=".Settings"
@@ -35,22 +33,18 @@
         <activity
             android:name=".Map"
             android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+
         <activity
             android:name=".Signup"
             android:exported="false" />
-        <activity
-            android:name=".Login"
-            android:exported="false" />
+
         <activity
             android:name=".HomeScreen"
             android:exported="false" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".SplashScreen1"
             android:exported="true">
-            <intent-filter>
+            <intent-filter>"
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

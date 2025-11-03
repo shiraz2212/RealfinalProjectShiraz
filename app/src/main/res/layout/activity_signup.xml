@@ -8,7 +8,7 @@
     tools:context=".Signup">
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/emailAddress"
         android:layout_width="394dp"
         android:layout_height="44dp"
         android:ems="10"
@@ -18,7 +18,7 @@
         tools:layout_editor_absoluteY="220dp" />
 
     <EditText
-        android:id="@+id/editTextNumberPassword"
+        android:id="@+id/etPassword"
         android:layout_width="392dp"
         android:layout_height="40dp"
         android:ems="10"
@@ -27,17 +27,8 @@
         tools:layout_editor_absoluteX="7dp"
         tools:layout_editor_absoluteY="415dp" />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="392dp"
-        android:layout_height="52dp"
-        android:backgroundTint="#A61414"
-        android:text="Create an account"
-        tools:layout_editor_absoluteX="-2dp"
-        tools:layout_editor_absoluteY="493dp" />
-
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/tvCreate"
         android:layout_width="207dp"
         android:layout_height="57dp"
         android:text="Create Account"
@@ -46,7 +37,7 @@
         tools:layout_editor_absoluteY="16dp" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/tvMass"
         android:layout_width="181dp"
         android:layout_height="27dp"
         android:text="Sign up to get started"
@@ -54,7 +45,7 @@
         tools:layout_editor_absoluteY="58dp" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/etMail"
         android:layout_width="383dp"
         android:layout_height="40dp"
         android:ems="10"
@@ -64,7 +55,7 @@
         tools:layout_editor_absoluteY="137dp" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name"
@@ -73,16 +64,16 @@
         tools:layout_editor_absoluteY="115dp" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/tvEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email Adress"
+        android:text="EmailAddress"
         android:textSize="16sp"
         tools:layout_editor_absoluteX="10dp"
         tools:layout_editor_absoluteY="198dp" />
 
     <EditText
-        android:id="@+id/editTextNumberPassword2"
+        android:id="@+id/etPassword2"
         android:layout_width="388dp"
         android:layout_height="45dp"
         android:ems="10"
@@ -92,7 +83,7 @@
         tools:layout_editor_absoluteY="311dp" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/tvPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Phone"
@@ -101,7 +92,7 @@
         tools:layout_editor_absoluteY="297dp" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/tvPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Password"
@@ -110,7 +101,7 @@
         tools:layout_editor_absoluteY="393dp" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/tvOr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="OR"
@@ -119,7 +110,7 @@
         tools:layout_editor_absoluteY="557dp" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/tvSUW"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign up with "
@@ -128,7 +119,7 @@
         tools:layout_editor_absoluteY="592dp" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnGoogle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#160801"
@@ -137,7 +128,7 @@
         tools:layout_editor_absoluteY="622dp" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btmFacebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#0D0101"
@@ -147,12 +138,20 @@
         tools:layout_editor_absoluteY="622dp" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/tvLogIn"
         android:layout_width="267dp"
         android:layout_height="38dp"
         android:text="Already have an accout?Login"
         android:textSize="16sp"
         tools:layout_editor_absoluteX="103dp"
         tools:layout_editor_absoluteY="677dp" />
+
+    <Button
+        android:id="@+id/btnAccount"
+        android:layout_width="315dp"
+        android:layout_height="54dp"
+        android:text="Create an account"
+        tools:layout_editor_absoluteX="43dp"
+        tools:layout_editor_absoluteY="492dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

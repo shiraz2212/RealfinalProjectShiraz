@@ -5,4 +5,154 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeScreen"/>
+    tools:context=".HomeScreen">
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="117dp"
+        android:layout_height="57dp"
+        android:gravity="center"
+        android:text="Home"
+        android:textSize="34sp"
+        tools:layout_editor_absoluteX="147dp"
+        tools:layout_editor_absoluteY="31dp"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editTextText2"
+        android:layout_width="253dp"
+        android:layout_height="42dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Search"
+        tools:layout_editor_absoluteX="79dp"
+        tools:layout_editor_absoluteY="88dp"
+        tools:ignore="MissingConstraints" />
+
+    <SearchView
+        android:layout_width="55dp"
+        android:layout_height="42dp"
+        tools:layout_editor_absoluteX="277dp"
+        tools:layout_editor_absoluteY="88dp"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="170dp"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="270dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextClock
+        android:id="@+id/textClock"
+        android:layout_width="80dp"
+        android:layout_height="124dp"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="315dp"
+        tools:layout_editor_absoluteY="6dp"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editTextText11"
+        android:layout_width="366dp"
+        android:layout_height="73dp"
+        android:ems="10"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="170dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="83dp"
+        android:layout_height="31dp"
+        android:text="Max-2 year"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="284dp"
+        tools:layout_editor_absoluteY="188dp"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editTextText12"
+        android:layout_width="370dp"
+        android:layout_height="76dp"
+        android:ems="10"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="17dp"
+        tools:layout_editor_absoluteY="268dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Luna-1year"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="289dp"
+        tools:layout_editor_absoluteY="293dp"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editTextText13"
+        android:layout_width="442dp"
+        android:layout_height="107dp"
+        android:ems="10"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="-25dp"
+        tools:layout_editor_absoluteY="499dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Report"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="648dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="166dp"
+        tools:layout_editor_absoluteY="653dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="57dp"
+        android:layout_height="26dp"
+        android:text="Adopt"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="316dp"
+        tools:layout_editor_absoluteY="656dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="140dp"
+        android:layout_height="67dp"
+        android:backgroundTint="#1B0202"
+        android:text="Add"
+        android:textColorLink="#F4D9D9"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="138dp"
+        tools:layout_editor_absoluteY="463dp"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
