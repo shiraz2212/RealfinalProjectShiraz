@@ -8,151 +8,200 @@
     tools:context=".HomeScreen">
 
     <TextView
-        android:id="@+id/textView9"
-        android:layout_width="117dp"
-        android:layout_height="57dp"
+        android:id="@+id/tvH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="31dp"
         android:gravity="center"
         android:text="Home"
         android:textSize="34sp"
-        tools:layout_editor_absoluteX="147dp"
-        tools:layout_editor_absoluteY="31dp"
+        app:layout_constraintEnd_toEndOf="@+id/editTextText2"
+        app:layout_constraintStart_toStartOf="@+id/editTextText2"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editTextText2"
-        android:layout_width="253dp"
-        android:layout_height="42dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="79dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="78dp"
         android:ems="10"
         android:inputType="text"
         android:text="Search"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="88dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvH"
         tools:ignore="MissingConstraints" />
 
     <SearchView
         android:layout_width="55dp"
         android:layout_height="42dp"
-        tools:layout_editor_absoluteX="277dp"
-        tools:layout_editor_absoluteY="88dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toEndOf="@+id/tvH"
+        app:layout_constraintTop_toTopOf="@+id/editTextText2"
         tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="41dp"
+        app:layout_constraintStart_toStartOf="@+id/editTextText11"
+        app:layout_constraintTop_toBottomOf="@+id/editTextText2"
         app:srcCompat="@mipmap/ic_launcher"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="170dp"
         tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="@+id/editTextText11"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
         app:srcCompat="@mipmap/ic_launcher"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="270dp"
         tools:ignore="MissingConstraints" />
 
     <TextClock
         android:id="@+id/textClock"
-        android:layout_width="80dp"
-        android:layout_height="124dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="21dp"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="315dp"
-        tools:layout_editor_absoluteY="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editTextText11"
-        android:layout_width="366dp"
-        android:layout_height="73dp"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="text"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="170dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="83dp"
+        android:layout_width="0dp"
         android:layout_height="31dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="96dp"
         android:text="Max-2 year"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="284dp"
-        tools:layout_editor_absoluteY="188dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView13"
+        app:layout_constraintEnd_toEndOf="@+id/textView16"
+        app:layout_constraintStart_toEndOf="@+id/button3"
+        app:layout_constraintTop_toTopOf="@+id/searchView2"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editTextText12"
-        android:layout_width="370dp"
+        android:layout_width="0dp"
         android:layout_height="76dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="262dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="262dp"
         android:ems="10"
         android:inputType="text"
-        tools:layout_editor_absoluteX="17dp"
-        tools:layout_editor_absoluteY="268dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextText13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textClock"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
         android:text="Luna-1year"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="289dp"
-        tools:layout_editor_absoluteY="293dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextText12"
+        app:layout_constraintEnd_toEndOf="@+id/editTextText12"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editTextText13"
         android:layout_width="442dp"
         android:layout_height="107dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="42dp"
         android:ems="10"
         android:inputType="text"
-        tools:layout_editor_absoluteX="-25dp"
-        tools:layout_editor_absoluteY="499dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintBottom_toTopOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="@+id/button3"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-25dp" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="51dp"
         android:text="Report"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="648dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="51dp"
         android:text="Location"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="166dp"
-        tools:layout_editor_absoluteY="653dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="57dp"
         android:layout_height="26dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="49dp"
         android:text="Adopt"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="316dp"
-        tools:layout_editor_absoluteY="656dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button3"
+        app:layout_constraintTop_toBottomOf="@+id/editTextText13"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="140dp"
         android:layout_height="67dp"
+        android:layout_marginTop="121dp"
+        android:layout_marginBottom="123dp"
         android:backgroundTint="#1B0202"
         android:text="Add"
         android:textColorLink="#F4D9D9"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="463dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
