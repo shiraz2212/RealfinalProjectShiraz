@@ -15,13 +15,13 @@
         android:gravity="center"
         android:text="Home"
         android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText2"
-        app:layout_constraintStart_toStartOf="@+id/editTextText2"
+        app:layout_constraintEnd_toEndOf="@+id/etSearch"
+        app:layout_constraintStart_toStartOf="@+id/etSearch"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/etSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="79dp"
@@ -36,12 +36,13 @@
         tools:ignore="MissingConstraints" />
 
     <SearchView
+        android:id="@+id/search"
         android:layout_width="55dp"
         android:layout_height="42dp"
         android:layout_marginStart="39dp"
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toEndOf="@+id/tvH"
-        app:layout_constraintTop_toTopOf="@+id/editTextText2"
+        app:layout_constraintTop_toTopOf="@+id/etSearch"
         tools:ignore="MissingConstraints" />
 
     <ImageView
@@ -50,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="41dp"
         app:layout_constraintStart_toStartOf="@+id/editTextText11"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2"
+        app:layout_constraintTop_toBottomOf="@+id/etSearch"
         app:srcCompat="@mipmap/ic_launcher"
         tools:ignore="MissingConstraints" />
 
