@@ -13,26 +13,36 @@
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="193dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginBottom="60dp"
         android:foregroundGravity="center_vertical"
-        tools:layout_editor_absoluteX="193dp"
-        tools:layout_editor_absoluteY="34dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginBottom="30dp"
         android:text="add details"
-        tools:layout_editor_absoluteX="228dp"
-        tools:layout_editor_absoluteY="222dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textView12"
+        app:layout_constraintStart_toStartOf="@+id/textView12"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="112dp"
-        android:layout_height="28dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="209dp"
+        android:layout_marginBottom="112dp"
         android:gravity="center"
         android:hint="Phone number"
-        tools:layout_editor_absoluteX="209dp"
-        tools:layout_editor_absoluteY="271dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
