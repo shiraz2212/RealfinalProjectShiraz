@@ -1,5 +1,6 @@
 package com.example.finalprojectshiraz;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -23,6 +24,7 @@ public class AnimalDetails extends AppCompatActivity {
     private TextInputLayout tilNotes;
     private CheckBox cbVaccinated;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

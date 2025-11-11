@@ -11,12 +11,14 @@
         android:id="@+id/tvH"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="135dp"
         android:layout_marginTop="31dp"
+        android:layout_marginEnd="134dp"
         android:gravity="center"
         android:text="Home"
         android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="@+id/etSearch"
-        app:layout_constraintStart_toStartOf="@+id/etSearch"
+        app:layout_constraintEnd_toEndOf="@+id/tv11"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
@@ -24,14 +26,12 @@
         android:id="@+id/etSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="79dp"
         android:layout_marginTop="7dp"
-        android:layout_marginEnd="78dp"
+        android:layout_marginEnd="33dp"
         android:ems="10"
         android:inputType="text"
         android:text="Search"
-        app:layout_constraintEnd_toEndOf="@+id/tv11"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/search"
         app:layout_constraintTop_toBottomOf="@+id/tvH"
         tools:ignore="MissingConstraints" />
 
@@ -41,6 +41,8 @@
         android:layout_height="42dp"
         android:layout_marginStart="39dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv11"
         app:layout_constraintStart_toEndOf="@+id/tvH"
         app:layout_constraintTop_toTopOf="@+id/etSearch"
         tools:ignore="MissingConstraints" />
@@ -49,9 +51,12 @@
         android:id="@+id/iv5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="41dp"
-        app:layout_constraintStart_toStartOf="@+id/etText"
-        app:layout_constraintTop_toBottomOf="@+id/etSearch"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="194dp"
+        android:layout_marginBottom="26dp"
+        app:layout_constraintBottom_toTopOf="@+id/etText12"
+        app:layout_constraintEnd_toStartOf="@+id/tv11"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@mipmap/ic_launcher"
         tools:ignore="MissingConstraints" />
 
@@ -59,9 +64,9 @@
         android:id="@+id/iv6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="2dp"
         app:layout_constraintStart_toStartOf="@+id/etText"
-        app:layout_constraintTop_toBottomOf="@+id/iv5"
+        app:layout_constraintTop_toTopOf="@+id/etText12"
         app:srcCompat="@mipmap/ic_launcher"
         tools:ignore="MissingConstraints" />
 
@@ -70,30 +75,30 @@
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="138dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="137dp"
         android:ems="10"
         android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/btn3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv11"
+        app:layout_constraintTop_toTopOf="@+id/search"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tv11"
         android:layout_width="0dp"
         android:layout_height="31dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginBottom="96dp"
+        android:layout_marginTop="107dp"
+        android:layout_marginEnd="51dp"
+        android:layout_marginBottom="105dp"
         android:text="Max-2 year"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv13"
-        app:layout_constraintEnd_toEndOf="@+id/tv16"
-        app:layout_constraintStart_toEndOf="@+id/btn3"
-        app:layout_constraintTop_toTopOf="@+id/searchView2"
+        app:layout_constraintBottom_toBottomOf="@+id/etText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv5"
+        app:layout_constraintTop_toTopOf="@+id/etSearch"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -101,94 +106,82 @@
         android:layout_width="0dp"
         android:layout_height="76dp"
         android:layout_marginStart="17dp"
+        android:layout_marginTop="186dp"
         android:layout_marginEnd="17dp"
-        android:layout_marginBottom="262dp"
+        android:layout_marginBottom="185dp"
         android:ems="10"
         android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="@+id/etText13"
+        app:layout_constraintBottom_toBottomOf="@+id/btn3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/etSearch"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tv13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="8dp"
         android:text="Luna-1year"
         android:textSize="16sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/etText12"
-        app:layout_constraintEnd_toEndOf="@+id/etText12"
+        app:layout_constraintBottom_toBottomOf="@+id/etText"
+        app:layout_constraintEnd_toEndOf="@+id/etText"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/etText13"
         android:layout_width="442dp"
-        android:layout_height="107dp"
+        android:layout_height="46dp"
         android:layout_marginTop="36dp"
-        android:layout_marginBottom="42dp"
+        android:layout_marginBottom="50dp"
         android:ems="10"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/tv14"
+        app:layout_constraintBottom_toTopOf="@+id/btnReport"
         app:layout_constraintTop_toTopOf="@+id/btn3"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="-25dp" />
-
-    <TextView
-        android:id="@+id/tv14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="51dp"
-        android:text="Report"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/tvLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="51dp"
-        android:text="Location"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/tv16"
-        android:layout_width="57dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="49dp"
-        android:text="Adopt"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn3"
-        app:layout_constraintTop_toBottomOf="@+id/etText13"
-        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btn3"
         android:layout_width="140dp"
         android:layout_height="67dp"
-        android:layout_marginTop="121dp"
-        android:layout_marginBottom="123dp"
+        android:layout_marginBottom="65dp"
         android:backgroundTint="#1B0202"
         android:text="Add"
         android:textColorLink="#F4D9D9"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvLocation"
+        app:layout_constraintBottom_toTopOf="@+id/btnAdoption"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv6"
         tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btnReport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Report"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnLocation"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginBottom="88dp"
+        android:text="Location"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnReport" />
+
+    <Button
+        android:id="@+id/btnAdoption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="37dp"
+        android:text="Adoption"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnLocation"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

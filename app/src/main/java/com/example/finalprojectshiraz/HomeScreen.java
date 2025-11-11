@@ -17,9 +17,12 @@ public class HomeScreen extends AppCompatActivity {
     private TextView tvH;
     private TextView tv11;
     private TextView tv13;
-    private TextView tv14;
+    private Button btnReport;
+    private Button btnLocation;
+    private Button btnAdoption;
     private TextView tvLocation;
-    private TextView tv16;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +38,35 @@ public class HomeScreen extends AppCompatActivity {
         tvH = findViewById(R.id.tvH);
         tv11 = findViewById(R.id.tv11);
         tv13 = findViewById(R.id.tv13);
-        tv14 = findViewById(R.id.tv14);
-        tvLocation = findViewById(R.id.tvLocation);
-        tv16 = findViewById(R.id.tv16);
+        btnReport = findViewById(R.id.btnReport);
+        btnLocation = findViewById(R.id.btnLocation);
+        btnAdoption = findViewById(R.id.btnAdoption);
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View view) {
                 Intent intent = new Intent(HomeScreen.this, AnimalDetails.class);
+                startActivity(intent);
+            }
+        });
+        btnReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeScreen.this, Report.class);
+                startActivity(intent);
+            }
+        });
+        btnLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    Intent intent = new Intent(HomeScreen.this, Map.class);
+                startActivity(intent);
+            }
+        });
+        btnAdoption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeScreen.this, Adoption.class);
                 startActivity(intent);
             }
         });
