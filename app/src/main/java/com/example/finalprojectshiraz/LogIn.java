@@ -50,7 +50,7 @@ private Button btnSignUP;
         btnSignUP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LogIn.this, HomeScreen.class);
+                Intent intent = new Intent(LogIn.this, Signup.class);
                 startActivity(intent);
             }
         });

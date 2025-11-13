@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -58,9 +59,53 @@ public class Signup extends AppCompatActivity
         btnAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Signup.this, HomeScreen.class);
-                startActivity(intent);
+                if (validateFields()) {
+                    Intent intent = new Intent(Signup.this, HomeScreen.class);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(Signup.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+    }
+
+    public boolean validateFields() {
+        boolean isValid = true;
+
+        String name = etMail.getText().toString().trim();
+        String email = emailAddress.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
+        String password2 = etPassword2.getText().toString().trim();
+
+        if (name.isEmpty()) {
+            etMail.setError("Name is required");
+            isValid = false;
+        } else {
+            etMail.setError(null);
+        }
+
+        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailAddress.setError("Valid email is required");
+            isValid = false;
+        } else {
+            emailAddress.setError(null);
+        }
+
+        if (password.isEmpty() || password.length() < 8) {
+            etPassword.setError("Password is required and must be at least 8 characters long");
+            isValid = false;
+        } else {
+            etPassword.setError(null);
+        }
+
+        if (password2.isEmpty() || !password2.equals(password)) {
+            etPassword2.setError("Passwords do not match");
+            isValid = false;
+        } else {
+            etPassword2.setError(null);
+        }
+
+        return isValid;
     }
 }
