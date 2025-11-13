@@ -13,6 +13,7 @@ public interface MyProfileQuery {
     @Query("SELECT * FROM MyProfile")
     List<MyProfile> getAll();
     // استخراج مستعمل حسب رقم المميز لهid
+
     @Query("SELECT * FROM MyProfile WHERE keyid IN (:userIds)")
     List<MyProfile> loadAllByIds(int[] userIds);
     //هل المستعمل موجود حسب الايميل وكلمة السر
