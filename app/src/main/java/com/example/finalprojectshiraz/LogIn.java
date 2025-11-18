@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,10 +58,56 @@ private Button btnSignUP;
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LogIn.this, HomeScreen.class);
-                startActivity(intent);
+                if (validateInputs()) {
+                    // Only proceed to HomeScreen if inputs are valid
+                    Intent intent = new Intent(LogIn.this, HomeScreen.class);
+                    startActivity(intent);
+                }
             }
         });
+
+    }
+
+    private boolean validateInputs() {
+        // Get the input values
+        String email = etEnterEmail.getText().toString().trim();
+        String password = tvEnterPass.getText().toString().trim();
+        boolean isValid = true;
+
+        // Validate email
+        if (email.isEmpty()) {
+            etEnterEmail.setError("Email is required");
+            isValid = false;
+        } else if (!isValidEmail(email)) {
+            etEnterEmail.setError("Please enter a valid email address");
+            isValid = false;
+        } else {
+            etEnterEmail.setError(null);
+        }
+
+        // Validate password
+        if (password.isEmpty()) {
+            tvEnterPass.setError("Password is required");
+            isValid = false;
+        } else if (password.length() < 6) {
+            tvEnterPass.setError("Password must be at least 6 characters");
+            isValid = false;
+        } else {
+            tvEnterPass.setError(null);
+        }
+
+        return isValid;
+    }
+    
+    private boolean isValidEmail(String email) {
+        if (email == null || email.isEmpty()) {
+            return false;
+        }
+        // Simple email validation
+        return email.contains("@") && 
+               email.contains(".") && 
+               email.indexOf("@") > 0 && 
+               email.lastIndexOf(".") > email.indexOf("@");
     }
 
 }

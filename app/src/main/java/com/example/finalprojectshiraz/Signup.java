@@ -18,7 +18,7 @@ public class Signup extends AppCompatActivity
 {
     private Button btnAccount,btnGoogle,btmFacebook;
     private TextView tvCreate,tvName, tvMass, tvPass, tvPhone, tvOr,tvEmail,tvSUW,tvLog;
-    private EditText etMail, etName, etPhone, etAddress, etPassword, etPassword2,emailAddress;
+    private EditText etMail, etName, etPhone, etAddress, editTextText, etPassword2,emailAddress;
 
 
 
@@ -51,7 +51,7 @@ public class Signup extends AppCompatActivity
             tvName = findViewById(R.id.tvName);
             tvPhone = findViewById(R.id.tvPhone);
             emailAddress = findViewById(R.id.emailAddress);
-            etPassword = findViewById(R.id.etPassword);
+        editTextText = findViewById(R.id.editTextText);
             etPassword2 = findViewById(R.id.etPassword2);
             emailAddress = findViewById(R.id.emailAddress);
 
@@ -75,7 +75,7 @@ public class Signup extends AppCompatActivity
 
         String name = etMail.getText().toString().trim();
         String email = emailAddress.getText().toString().trim();
-        String password = etPassword.getText().toString().trim();
+        String password = editTextText.getText().toString().trim();
         String password2 = etPassword2.getText().toString().trim();
 
         if (name.isEmpty()) {
@@ -93,10 +93,10 @@ public class Signup extends AppCompatActivity
         }
 
         if (password.isEmpty() || password.length() < 8) {
-            etPassword.setError("Password is required and must be at least 8 characters long");
+            editTextText.setError("Password is required and must be at least 8 characters long");
             isValid = false;
         } else {
-            etPassword.setError(null);
+            editTextText.setError(null);
         }
 
         if (password2.isEmpty() || !password2.equals(password)) {
