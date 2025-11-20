@@ -15,12 +15,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class Signup extends AppCompatActivity
-{
-    private Button btnAccount,btnGoogle,btmFacebook,btnLogin2;
-    private TextView tvCreate,tvName, tvMass, tvPass, tvPhone, tvOr,tvEmail,tvSUW,tvLog;
-    private EditText etMail, etName, etPhone, etAddress, editTextText, etPassword2,emailAddress;
-
+public class Signup extends AppCompatActivity {
+    private Button btnAccount, btnGoogle, btmFacebook, btnLogin2;
+    private TextView tvCreate, tvName, tvMass, tvPass, tvPhone, tvOr, tvEmail, tvSUW, tvLog;
+    private EditText etMail, etName, etPhone, etAddress, editTextText, etPassword2, emailAddress;
 
 
     @SuppressLint("MissingInflatedId")
@@ -35,28 +33,28 @@ public class Signup extends AppCompatActivity
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
 
-            });
+        });
 
 
-            btnGoogle = findViewById(R.id.btnGoogle);
-            btmFacebook = findViewById(R.id.btmFacebook);
-            tvCreate = findViewById(R.id.tvCreate);
-            tvName = findViewById(R.id.tvName);
-            tvMass = findViewById(R.id.tvMass);
-            tvPass = findViewById(R.id.tvPass);
-            tvPhone = findViewById(R.id.tvPhone);
-            tvOr = findViewById(R.id.tvOr);
-            tvEmail = findViewById(R.id.tvEmail);
-            tvSUW = findViewById(R.id.tvSUW);
-            tvLog = findViewById(R.id.tvLogIn);
-            etMail = findViewById(R.id.etMail);
-            tvName = findViewById(R.id.tvName);
-            tvPhone = findViewById(R.id.tvPhone);
-            emailAddress = findViewById(R.id.emailAddress);
+        btnGoogle = findViewById(R.id.btnGoogle);
+        btmFacebook = findViewById(R.id.btmFacebook);
+        tvCreate = findViewById(R.id.tvCreate);
+        tvName = findViewById(R.id.tvName);
+        tvMass = findViewById(R.id.tvMass);
+        tvPass = findViewById(R.id.tvPass);
+        tvPhone = findViewById(R.id.tvPhone);
+        tvOr = findViewById(R.id.tvOr);
+        tvEmail = findViewById(R.id.tvEmail);
+        tvSUW = findViewById(R.id.tvSUW);
+        tvLog = findViewById(R.id.tvLogIn);
+        etMail = findViewById(R.id.etMail);
+        tvName = findViewById(R.id.tvName);
+        tvPhone = findViewById(R.id.tvPhone);
+        emailAddress = findViewById(R.id.emailAddress);
         editTextText = findViewById(R.id.editTextText);
-            etPassword2 = findViewById(R.id.etPassword2);
-            emailAddress = findViewById(R.id.emailAddress);
-            btnLogin2 = findViewById(R.id.btnLogin2);
+        etPassword2 = findViewById(R.id.etPassword2);
+        emailAddress = findViewById(R.id.emailAddress);
+        btnLogin2 = findViewById(R.id.btnLogin2);
 
         btnAccount = findViewById(R.id.btnAccount);
 
@@ -67,12 +65,10 @@ public class Signup extends AppCompatActivity
                 if (validateFields()) {
                     Intent intent = new Intent(Signup.this, HomeScreen.class);
                     startActivity(intent);
-                }
-                else {
+                } else {
                     Toast.makeText(Signup.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 }
             }
-
         });
         btnLogin2.setOnClickListener(new View.OnClickListener() {
             @Override
