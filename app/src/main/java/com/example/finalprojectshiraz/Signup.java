@@ -1,5 +1,6 @@
 package com.example.finalprojectshiraz;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,12 +17,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Signup extends AppCompatActivity
 {
-    private Button btnAccount,btnGoogle,btmFacebook;
+    private Button btnAccount,btnGoogle,btmFacebook,btnLogin2;
     private TextView tvCreate,tvName, tvMass, tvPass, tvPhone, tvOr,tvEmail,tvSUW,tvLog;
     private EditText etMail, etName, etPhone, etAddress, editTextText, etPassword2,emailAddress;
 
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +56,11 @@ public class Signup extends AppCompatActivity
         editTextText = findViewById(R.id.editTextText);
             etPassword2 = findViewById(R.id.etPassword2);
             emailAddress = findViewById(R.id.emailAddress);
+            btnLogin2 = findViewById(R.id.btnLogin2);
 
         btnAccount = findViewById(R.id.btnAccount);
+
+
         btnAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,6 +71,14 @@ public class Signup extends AppCompatActivity
                 else {
                     Toast.makeText(Signup.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 }
+            }
+
+        });
+        btnLogin2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Signup.this, LogIn.class);
+                startActivity(intent);
             }
         });
     }

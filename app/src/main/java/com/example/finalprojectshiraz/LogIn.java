@@ -108,6 +108,7 @@ private Button btnSignUP;
                email.contains(".") && 
                email.indexOf("@") > 0 && 
                email.lastIndexOf(".") > email.indexOf("@");
+
     }
 
 }

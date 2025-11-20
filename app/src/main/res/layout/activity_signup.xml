@@ -12,13 +12,14 @@
         android:id="@+id/emailAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="13dp"
         android:ems="10"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/tvPhone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
     <TextView
         android:id="@+id/tvCreate"
@@ -26,10 +27,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="82dp"
         android:text="Create Account"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvName"
+        app:layout_constraintBottom_toTopOf="@+id/tvMass"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,18 +37,19 @@
         android:id="@+id/tvMass"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginBottom="19dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginBottom="22dp"
         android:padding="20dp"
         android:text="Sign up to get started"
-        app:layout_constraintBottom_toBottomOf="@+id/tvName"
-        app:layout_constraintStart_toStartOf="@+id/tvName" />
+        app:layout_constraintBottom_toTopOf="@+id/tvName"
+        app:layout_constraintStart_toStartOf="@+id/tvCreate"
+        app:layout_constraintTop_toBottomOf="@+id/tvCreate" />
 
     <EditText
         android:id="@+id/etMail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="28dp"
         android:ems="10"
         android:hint="Enter First and Last Name"
         android:inputType="text"
@@ -62,30 +63,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
-        android:layout_marginBottom="22dp"
         android:text="Name"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/etMail"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCreate" />
+        app:layout_constraintTop_toBottomOf="@+id/tvMass" />
 
     <TextView
         android:id="@+id/tvEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="71dp"
         android:text="EmailAddress"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvPhone"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/emailAddress"
+        app:layout_constraintStart_toStartOf="@+id/emailAddress"
         app:layout_constraintTop_toBottomOf="@+id/etMail" />
 
     <EditText
         android:id="@+id/etPassword2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="24dp"
         android:ems="10"
         android:hint="+972"
         android:inputType="numberPassword"
@@ -98,21 +96,21 @@
         android:id="@+id/tvPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:text="Phone"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/etPassword2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+        app:layout_constraintStart_toStartOf="@+id/etPassword2"
+        app:layout_constraintTop_toBottomOf="@+id/emailAddress" />
 
     <TextView
         android:id="@+id/tvPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:text="Password"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword2" />
 
@@ -121,7 +119,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="16dp"
         android:text="OR"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvSUW"
@@ -131,7 +129,7 @@
         android:id="@+id/tvSUW"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="17dp"
         android:text="Sign up with "
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/btmFacebook"
@@ -143,50 +141,49 @@
         android:id="@+id/btnGoogle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="7dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="17dp"
         android:backgroundTint="#160801"
         android:text="Google"
-        app:layout_constraintBottom_toTopOf="@+id/tvLogIn"
         app:layout_constraintEnd_toStartOf="@+id/tvSUW"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvSUW" />
 
     <Button
         android:id="@+id/btmFacebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="7dp"
+        android:layout_marginBottom="19dp"
         android:backgroundTint="#0D0101"
         android:backgroundTintMode="src_atop"
         android:text="facebook"
-        app:layout_constraintBottom_toTopOf="@+id/tvLogIn"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogin2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvSUW"
         app:layout_constraintTop_toBottomOf="@+id/tvSUW" />
 
     <TextView
         android:id="@+id/tvLogIn"
-        android:layout_width="0dp"
+        android:layout_width="267dp"
         android:layout_height="0dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginBottom="16dp"
-        android:text="Already have an accout?Login"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="3dp"
+        android:text="Already have an accout?"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btmFacebook"
-        app:layout_constraintStart_toStartOf="@+id/tvMass"
-        app:layout_constraintTop_toBottomOf="@+id/btmFacebook" />
+        app:layout_constraintEnd_toEndOf="@+id/btnLogin2"
+        app:layout_constraintTop_toTopOf="@+id/btnLogin2" />
 
     <Button
         android:id="@+id/btnAccount"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="43dp"
-        android:layout_marginEnd="43dp"
-        android:layout_marginBottom="37dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="38dp"
         android:text="Create an account"
         app:layout_constraintBottom_toTopOf="@+id/tvSUW"
         app:layout_constraintEnd_toEndOf="parent"
@@ -197,7 +194,7 @@
         android:id="@+id/editTextText"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="31dp"
+        android:layout_marginBottom="32dp"
         android:ems="10"
         android:hint="password"
         android:inputType="text"
@@ -205,5 +202,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPass" />
+
+    <Button
+        android:id="@+id/btnLogin2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="74dp"
+        android:layout_marginEnd="73dp"
+        android:layout_marginBottom="16dp"
+        android:text="Login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnAccount"
+        app:layout_constraintStart_toEndOf="@+id/btnGoogle"
+        app:layout_constraintTop_toBottomOf="@+id/btmFacebook" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
