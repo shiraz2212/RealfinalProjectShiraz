@@ -13,7 +13,8 @@
         android:layout_height="84dp"
         tools:layout_editor_absoluteX="156dp"
         tools:layout_editor_absoluteY="32dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView20"
@@ -21,7 +22,8 @@
         android:layout_height="26dp"
         android:text="shiraz hammoud"
         tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="126dp" />
+        tools:layout_editor_absoluteY="126dp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editTextText6"
@@ -31,7 +33,8 @@
         android:inputType="text"
         android:text="Edit Profile"
         tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="193dp" />
+        tools:layout_editor_absoluteY="193dp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editTextText7"
@@ -41,7 +44,8 @@
         android:inputType="text"
         android:text="Settings"
         tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="276dp" />
+        tools:layout_editor_absoluteY="276dp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editTextText8"
@@ -51,7 +55,8 @@
         android:inputType="text"
         android:text="Invite a friend"
         tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="363dp" />
+        tools:layout_editor_absoluteY="363dp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editTextText9"
@@ -61,6 +66,7 @@
         android:inputType="text"
         android:text="Logout"
         tools:layout_editor_absoluteX="39dp"
-        tools:layout_editor_absoluteY="452dp" />
+        tools:layout_editor_absoluteY="452dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
