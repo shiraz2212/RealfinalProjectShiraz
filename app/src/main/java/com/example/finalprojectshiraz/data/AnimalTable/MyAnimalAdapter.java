@@ -1,4 +1,6 @@
 package com.example.finalprojectshiraz.data.AnimalTable;
+import static com.example.finalprojectshiraz.R.*;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,26 +45,24 @@ public class MyAnimalAdapter extends ArrayAdapter<Animal>
 
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         //בניית הפריט הגרפי מתו קובץ העיצוב
-        View vitem= convertView;
-        if(vitem==null)
-            vitem= LayoutInflater.from(getContext()).inflate(itemLayout,parent,false);
+        View vitem = convertView;
+        if (vitem == null)
+            vitem = LayoutInflater.from(getContext()).inflate(itemLayout, parent, false);
         //קבלת הפניות לרכיבים בקובץ העיצוב
-        ImageView imageView=vitem.findViewById(R.id.imgVitm);
-        TextView tvItemTitle=vitem.findViewById(R.id.tvItemTitle);
-        TextView tvItemText=vitem.findViewById(R.id.tvItemText);
-        TextView tvItemImportance=vitem.findViewById(R.id.tvItemImportance);
-        ImageButton imgBtnSendSms=vitem.findViewById(R.id.imgBtnSendSmsitm);
-        ImageButton imgBtnCall=vitem.findViewById(R.id.imgBtnCallitm);
-        ImageButton imgBtnEdit=vitem.findViewById(R.id.imgBtnEdititm);
-        ImageButton imgBtnDelete=vitem.findViewById(R.id.imgBtnDeleteitm);
+        ImageView imageView = vitem.findViewById(R.id.imgVitm);
+        TextView tvItemTitle = vitem.findViewById(R.id.tvItemTitle);
+        TextView tvItemText = vitem.findViewById(R.id.tvItemText);
+        TextView tvItemImportance = vitem.findViewById(R.id.tvItemImportance);
+        ImageButton imgBtnSendSms = vitem.findViewById(R.id.imgBtnSendSmsitm);
+        ImageButton imgBtnCall = vitem.findViewById(R.id.imgBtnCallitm);
+        ImageButton imgBtnEdit = vitem.findViewById(R.id.imgBtnEdititm);
+        ImageButton imgBtnDelete = vitem.findViewById(R.id.imgBtnDeleteitm);
         //קבלת הנתון (עצם) הנוכחי
-        Animal current=getItem(position);
-
-
-
+        Animal current = getItem(position);
 
 
         return vitem;
     }
+    }
 
-}
+
