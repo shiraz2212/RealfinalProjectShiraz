@@ -54,6 +54,11 @@ public class AnimalDetails extends AppCompatActivity {
         });
     }
 
+    /**
+     * تتحقق من صحة استخدام النموذج.
+     *
+     * @return إذا كانت كل الحقول صحيحة، فإنها صحيحة; وإلا، فإنها خاطئة.
+     */
     private boolean validateForm() {
         boolean isValid = true;
         // Extract values from form fields

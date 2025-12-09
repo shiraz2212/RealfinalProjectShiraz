@@ -11,6 +11,11 @@ import androidx.core.view.WindowInsetsCompat;
 public class Adoption extends AppCompatActivity {
 
     @Override
+    /**
+     * هذه الدالة تستدعي في كل مرة يتم انشاء هذا النموذج لتعيين المحتوي
+     *
+     * @param savedInstanceState هذا المتغير لاستدعاء الكلاس الأب للنموذج الذي تم انشاءه فيه
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
