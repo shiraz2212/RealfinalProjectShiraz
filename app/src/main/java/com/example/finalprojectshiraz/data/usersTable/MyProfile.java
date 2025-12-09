@@ -20,7 +20,7 @@ public class MyProfile {
                 "keyid=" + keyid +
                 ", fullName='" + fullName + '\'' +
                 ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
+
                 ", passw='" + passw + '\'' +
                 '}';
     }
@@ -31,5 +31,25 @@ public class MyProfile {
 
     public void setKeyid(long keyid) {
         this.keyid = keyid;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setMail(String email) {
+        this.email = email;
+    }
+
+    public void setPass(String password) {
+        this.passw = password;
+    }
+
+    public String getPassw() {
+        return passw;
     }
 }

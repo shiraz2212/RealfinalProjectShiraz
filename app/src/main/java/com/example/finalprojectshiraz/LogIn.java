@@ -13,6 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.room.Room;
+
+import com.example.finalprojectshiraz.data.AppDatabase;
+import com.example.finalprojectshiraz.data.usersTable.MyProfile;
 
 public class LogIn extends AppCompatActivity {
 private TextView tvLogin;
@@ -74,6 +78,8 @@ private Button btnSignUP;
         String password = tvEnterPass.getText().toString().trim();
         boolean isValid = true;
 
+
+
         // Validate email
         if (email.isEmpty()) {
             etEnterEmail.setError("Email is required");
@@ -95,7 +101,16 @@ private Button btnSignUP;
         } else {
             tvEnterPass.setError(null);
         }
-
+if (isValid) {
+    AppDatabase db = AppDatabase.getDB(getApplicationContext());
+            MyProfile profile = db.getProfile().checkEmail(email);
+    if (profile != null && profile.getPassw().equals(password)) {
+        Intent intent = new Intent(LogIn.this, HomeScreen.class);
+        startActivity(intent);
+    } else {
+        Toast.makeText(LogIn.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+    }
+}
         return isValid;
     }
     

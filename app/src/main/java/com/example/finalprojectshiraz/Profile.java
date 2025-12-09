@@ -21,4 +21,11 @@ public class Profile extends AppCompatActivity {
             return insets;
         });
     }
+
+    public void setPass(String password) {
+
+    }
+
+    public void setFullName(String name) {
+    }
 }

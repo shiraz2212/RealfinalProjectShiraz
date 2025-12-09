@@ -63,6 +63,7 @@ public class MyAnimalAdapter extends ArrayAdapter<Animal>
 
         return vitem;
     }
+
     }
 
 

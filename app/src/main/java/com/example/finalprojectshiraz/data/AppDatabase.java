@@ -22,36 +22,40 @@ public abstract class AppDatabase extends RoomDatabase {
      */
 
 
-        private static AppDatabase db;
-
-        /**
-         *يعيد كائن لعمليات جدول المستعملين
-         * @return
-         */
-        public abstract MyProfileQuery myProfileQuery();
+    private static AppDatabase db;
 
     /**
+     * يعيد كائن لعمليات جدول المستعملين
      *
+     * @return
+     */
+
+
+
+    /**
      * @return الـ query للجدول الخاص بالمستخدمين
      */
-        public abstract  AnimalQuery animalQuery();
+    public abstract AnimalQuery animalQuery();
 
     /**
      * بناء قاعدة البيانات واعادة كائن يؤشر عليها
+     *
      * @param context
      * @return
      */
     public static AppDatabase getDB(Context context) {
-            if (db == null) {
-                db = Room.databaseBuilder(context, AppDatabase.class, "myDatabase")//بناء قاعدة البيانات واعادة كائن يؤشر عليها
-                        .allowMainThreadQueries()
-                        .build();
-            }
-            return db;
-
+        if (db == null) {
+            db = Room.databaseBuilder(context, AppDatabase.class, "myDatabase")//بناء قاعدة البيانات واعادة كائن يؤشر عليها
+                    .allowMainThreadQueries()
+                    .build();
         }
+        return db;
 
     }
+
+
+    public abstract MyProfileQuery getProfile();
+}
 
 
 

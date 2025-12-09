@@ -15,6 +15,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.finalprojectshiraz.data.usersTable.MyProfile;
+
 public class Signup extends AppCompatActivity {
     private Button btnAccount, btnGoogle, btmFacebook, btnLogin2;
     private TextView tvCreate, tvName, tvMass, tvPass, tvPhone, tvOr, tvEmail, tvSUW, tvLog;
@@ -114,7 +116,14 @@ public class Signup extends AppCompatActivity {
         } else {
             etPassword2.setError(null);
         }
+        if(isValid) {
 
+
+            MyProfile user = new MyProfile();
+            user.setFullName(name);
+            user.setMail(email);
+            user.setPass(password);
+        }
         return isValid;
     }
 }
