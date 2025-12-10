@@ -8,12 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.finalprojectshiraz.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MyAnimalAdapter extends ArrayAdapter<Animal>
 {

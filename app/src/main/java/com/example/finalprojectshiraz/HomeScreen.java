@@ -47,6 +47,7 @@ public class HomeScreen extends AppCompatActivity {
             return insets;
 
         });
+
         adapter = new MyAnimalAdapter(this, R.layout.task_item_layout);
         lstvAnimals.setAdapter(adapter);
         btn3 = findViewById(R.id.btn3);
@@ -86,5 +87,13 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Refresh the adapter data when the activity resumes
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
     }
 }
