@@ -13,11 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="135dp"
         android:layout_marginTop="31dp"
-        android:layout_marginEnd="134dp"
         android:gravity="center"
         android:text="Home"
         android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="@+id/tv11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
@@ -41,92 +39,8 @@
         android:layout_height="42dp"
         android:layout_marginStart="39dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv11"
         app:layout_constraintStart_toEndOf="@+id/tvH"
         app:layout_constraintTop_toTopOf="@+id/etSearch"
-        tools:ignore="MissingConstraints" />
-
-    <ImageView
-        android:id="@+id/iv5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="194dp"
-        android:layout_marginBottom="26dp"
-        app:layout_constraintBottom_toTopOf="@+id/etText12"
-        app:layout_constraintEnd_toStartOf="@+id/tv11"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@mipmap/ic_launcher"
-        tools:ignore="MissingConstraints" />
-
-    <ImageView
-        android:id="@+id/iv6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        app:layout_constraintStart_toStartOf="@+id/etText"
-        app:layout_constraintTop_toTopOf="@+id/etText12"
-        app:srcCompat="@mipmap/ic_launcher"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/etText"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="138dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="137dp"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/btn3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/search"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/tv11"
-        android:layout_width="0dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="107dp"
-        android:layout_marginEnd="51dp"
-        android:layout_marginBottom="105dp"
-        android:text="Max-2 year"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/etText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv5"
-        app:layout_constraintTop_toTopOf="@+id/etSearch"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/etText12"
-        android:layout_width="0dp"
-        android:layout_height="76dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="186dp"
-        android:layout_marginEnd="17dp"
-        android:layout_marginBottom="185dp"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="@+id/btn3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etSearch"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/tv13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="21dp"
-        android:layout_marginBottom="8dp"
-        android:text="Luna-1year"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/etText"
-        app:layout_constraintEnd_toEndOf="@+id/etText"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -187,5 +101,12 @@
         android:text="Adoption"
         app:layout_constraintBaseline_toBaselineOf="@+id/btnLocation"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ListView
+        android:id="@+id/lstTasks"
+        android:layout_width="0dp"
+        android:layout_height="328dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="131dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

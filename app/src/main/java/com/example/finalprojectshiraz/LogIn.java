@@ -62,12 +62,12 @@ private Button btnSignUP;
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (validateInputs()) {
+               // if (validateInputs()) {
                     // Only proceed to HomeScreen if inputs are valid
                     Intent intent = new Intent(LogIn.this, HomeScreen.class);
                     startActivity(intent);
                 }
-            }
+          //  }
         });
 
     }

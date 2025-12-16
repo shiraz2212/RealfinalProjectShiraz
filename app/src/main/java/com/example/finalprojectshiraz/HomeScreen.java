@@ -14,13 +14,17 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.finalprojectshiraz.data.AnimalTable.Animal;
 import com.example.finalprojectshiraz.data.AnimalTable.MyAnimalAdapter;
+import com.example.finalprojectshiraz.data.AppDatabase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.List;
 
 public class HomeScreen extends AppCompatActivity {
     private Button btn3;
     private TextView tvH;
-    private TextView tv11;
+
     private TextView tv13;
     private Button btnReport;
     private Button btnLocation;
@@ -32,6 +36,8 @@ public class HomeScreen extends AppCompatActivity {
     private ListView lstvAnimals;
     private MyAnimalAdapter adapter;
 
+private ListView lstTasks;
+private MyAnimalAdapter adapterTasks;
 
 
 
@@ -52,8 +58,10 @@ public class HomeScreen extends AppCompatActivity {
         lstvAnimals.setAdapter(adapter);
         btn3 = findViewById(R.id.btn3);
         tvH = findViewById(R.id.tvH);
-        tv11 = findViewById(R.id.tv11);
-        tv13 = findViewById(R.id.tv13);
+        lstTasks=findViewById(R.id.lstTasks);
+        adapterTasks=new MyAnimalAdapter(this,R.layout.task_item_layout);
+        lstTasks.setAdapter(adapterTasks);
+
         btnReport = findViewById(R.id.btnReport);
         btnLocation = findViewById(R.id.btnLocation);
         btnAdoption = findViewById(R.id.btnAdoption);
@@ -91,9 +99,10 @@ public class HomeScreen extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Refresh the adapter data when the activity resumes
-        if (adapter != null) {
-            adapter.notifyDataSetChanged();
-        }
+
+        List<Animal> tasks= AppDatabase.getDB(this).animalQuery().getAllAnimal();
+        AnimalAdapter.clear();
+        AnimalArrayAdapter.addAll(tasks);
+        AnimalArrayAdapter.notifyDataSetChanged();
     }
 }
