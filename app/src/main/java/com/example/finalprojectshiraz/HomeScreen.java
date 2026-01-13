@@ -1,5 +1,6 @@
 package com.example.finalprojectshiraz;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -32,39 +33,40 @@ public class HomeScreen extends AppCompatActivity {
     private TextView tvLocation;
 
     private Spinner spnrAnimalType;
-    private FloatingActionButton fabAddAnimal;
-    private ListView lstvAnimals;
-    private MyAnimalAdapter adapter;
+    private FloatingActionButton fabAddAnimal;//إضافة حيوان جديد
 
-private ListView lstTasks;
-private MyAnimalAdapter adapterTasks;
+private ListView lstvAnimals;//القائمة اللي بتعرض الحيوانات
+private MyAnimalAdapter adapterAnimals;//ربط البيانات بالواجهة
 
 
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_home_screen);
+    protected void onCreate(Bundle savedInstanceState) { //onCreate → أول دالة تُستدعى عند فتح الشاشة
+        super.onCreate(savedInstanceState);//لازم تستدعيها عشان Activity تشتغل بشكل طبيعي
+        EdgeToEdge.enable(this);//لتمكين عرض الشاشة بالكامل خلف الـ status bar و navigation bar
+        setContentView(R.layout.activity_home_screen);//كل العناصر اللي عرّفناها (Button, TextView, ListView) موجودة في هذا XML
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
-
+//يهيئ Activity
+//
+//يجعلها Edge-to-Edge (عرض كامل للشاشة)
+//
+//يضمن أن كل العناصر داخل الشاشة ما تتداخل مع status/navigation bars
         });
-
-        adapter = new MyAnimalAdapter(this, R.layout.task_item_layout);
-        lstvAnimals.setAdapter(adapter);
-        btn3 = findViewById(R.id.btn3);
-        tvH = findViewById(R.id.tvH);
-        lstTasks=findViewById(R.id.lstTasks);
-        adapterTasks=new MyAnimalAdapter(this,R.layout.task_item_layout);
-        lstTasks.setAdapter(adapterTasks);
-
+        lstvAnimals=findViewById(R.id.lstTasks);
         btnReport = findViewById(R.id.btnReport);
         btnLocation = findViewById(R.id.btnLocation);
         btnAdoption = findViewById(R.id.btnAdoption);
+        adapterAnimals = new MyAnimalAdapter(this, R.layout.task_item_layout);
+        lstvAnimals.setAdapter(adapterAnimals);
+        btn3 = findViewById(R.id.btn3);
+        tvH = findViewById(R.id.tvH);
+
+
 
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,10 +101,11 @@ private MyAnimalAdapter adapterTasks;
     @Override
     protected void onResume() {
         super.onResume();
-
-        List<Animal> tasks= AppDatabase.getDB(this).animalQuery().getAllAnimal();
-        AnimalAdapter.clear();
-        AnimalArrayAdapter.addAll(tasks);
-        AnimalArrayAdapter.notifyDataSetChanged();
+        //استخراج المعطيات من قاعدة البيانات
+        List<Animal> allAnimal= AppDatabase.getDB(this).animalQuery().getAllAnimal();
+        //تنظيف المنسق من جميع المعطيات السابقة
+        adapterAnimals.clear();
+        adapterAnimals.addAll(allAnimal);
+        adapterAnimals.notifyDataSetChanged();
     }
 }
