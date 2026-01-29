@@ -24,8 +24,8 @@
         android:id="@+id/etSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="33dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="4dp"
         android:ems="10"
         android:inputType="text"
         android:text="Search"
@@ -37,8 +37,8 @@
         android:id="@+id/search"
         android:layout_width="55dp"
         android:layout_height="42dp"
-        android:layout_marginStart="39dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintStart_toEndOf="@+id/tvH"
         app:layout_constraintTop_toTopOf="@+id/etSearch"
         tools:ignore="MissingConstraints" />
@@ -109,5 +109,13 @@
         android:layout_height="328dp"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="131dp" />
+
+    <ImageView
+        android:id="@+id/settingsVector"
+        android:layout_width="31dp"
+        android:layout_height="39dp"
+        app:srcCompat="@drawable/baseline_settings_24"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="29dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

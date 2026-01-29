@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -37,6 +38,7 @@ public class HomeScreen extends AppCompatActivity {
 
 private ListView lstvAnimals;//القائمة اللي بتعرض الحيوانات
 private MyAnimalAdapter adapterAnimals;//ربط البيانات بالواجهة
+    private ImageView settingsVector;
 
 
 
@@ -65,6 +67,7 @@ private MyAnimalAdapter adapterAnimals;//ربط البيانات بالواجه�
         lstvAnimals.setAdapter(adapterAnimals);
         btn3 = findViewById(R.id.btn3);
         tvH = findViewById(R.id.tvH);
+        settingsVector=findViewById(R.id.settingsVector);
 
 
 
@@ -94,6 +97,13 @@ private MyAnimalAdapter adapterAnimals;//ربط البيانات بالواجه�
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeScreen.this, Adoption.class);
+                startActivity(intent);
+            }
+        });
+        settingsVector.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeScreen.this,Settings.class);
                 startActivity(intent);
             }
         });
