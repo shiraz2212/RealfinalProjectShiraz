@@ -55,6 +55,9 @@ public abstract class AppDatabase extends RoomDatabase {
 
 
     public abstract MyProfileQuery getProfile();
+    /**
+     * “يا Room، أنا عندي DAO اسمه MyProfileQuery، وانت بدك تولّد الكود الحقيقي تبعه”
+     */
 }
 
 

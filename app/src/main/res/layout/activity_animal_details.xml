@@ -139,6 +139,7 @@
             android:text="Save Animal Details"
             android:textAllCaps="false"
             android:textSize="14sp"
-            app:cornerRadius="8dp" />
+            app:cornerRadius="8dp"
+            tools:ignore="TouchTargetSizeCheck" />
     </LinearLayout>
 </LinearLayout>

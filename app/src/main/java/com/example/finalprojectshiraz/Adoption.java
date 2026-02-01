@@ -18,7 +18,7 @@ public class Adoption extends AppCompatActivity {
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        EdgeToEdge.enable(this);//يفعّل العرض بكامل الشاشة
         setContentView(R.layout.activity_adoption);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -26,4 +26,10 @@ public class Adoption extends AppCompatActivity {
             return insets;
         });
     }
+    /**
+     * هاي أول دالة بتشتغل لما شاشة التبنّي تنفتح
+     * يهيّئ شاشة Adoption
+     * يربطها بالـ XML
+     *  يضبط العرض الكامل والحواف
+     */
 }

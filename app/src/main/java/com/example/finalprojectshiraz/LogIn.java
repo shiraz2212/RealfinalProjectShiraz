@@ -19,19 +19,19 @@ import com.example.finalprojectshiraz.data.AppDatabase;
 import com.example.finalprojectshiraz.data.usersTable.MyProfile;
 
 public class LogIn extends AppCompatActivity {
-private TextView tvLogin;
-private TextView tvText;
-private TextView tvEmailAddress;
-private EditText etEnterEmail;
-private TextView tvPassword;
-private TextView tvEnterPass;
-private TextView tvF;
-private Button btnLogin;
-private Button btnSignUP;
+    private TextView tvLogin;
+    private TextView tvText;
+    private TextView tvEmailAddress;
+    private EditText etEnterEmail;
+    private TextView tvPassword;
+    private TextView tvEnterPass;
+    private TextView tvF;
+    private Button btnLogin;
+    private Button btnSignUP;
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
-
 
 
         super.onCreate(savedInstanceState);
@@ -62,12 +62,12 @@ private Button btnSignUP;
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // if (validateInputs()) {
-                    // Only proceed to HomeScreen if inputs are valid
-                    Intent intent = new Intent(LogIn.this, HomeScreen.class);
-                    startActivity(intent);
-                }
-          //  }
+                // if (validateInputs()) {
+                // Only proceed to HomeScreen if inputs are valid
+                Intent intent = new Intent(LogIn.this, HomeScreen.class);
+                startActivity(intent);
+            }
+            //  }
         });
 
     }
@@ -77,7 +77,6 @@ private Button btnSignUP;
         String email = etEnterEmail.getText().toString().trim();
         String password = tvEnterPass.getText().toString().trim();
         boolean isValid = true;
-
 
 
         // Validate email
@@ -101,29 +100,30 @@ private Button btnSignUP;
         } else {
             tvEnterPass.setError(null);
         }
-if (isValid) {
-    AppDatabase db = AppDatabase.getDB(getApplicationContext());
+        if (isValid) {
+            AppDatabase db = AppDatabase.getDB(getApplicationContext());
             MyProfile profile = db.getProfile().checkEmail(email);
-    if (profile != null && profile.getPassw().equals(password)) {
-        Intent intent = new Intent(LogIn.this, HomeScreen.class);
-        startActivity(intent);
-    } else {
-        Toast.makeText(LogIn.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
-    }
-}
+            if (profile != null && profile.getPassw().equals(password)) {
+                Intent intent = new Intent(LogIn.this, HomeScreen.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(LogIn.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+            }
+        }
         return isValid;
     }
-    
+
     private boolean isValidEmail(String email) {
         if (email == null || email.isEmpty()) {
             return false;
         }
         // Simple email validation
-        return email.contains("@") && 
-               email.contains(".") && 
-               email.indexOf("@") > 0 && 
-               email.lastIndexOf(".") > email.indexOf("@");
+        return email.contains("@") &&
+                email.contains(".") &&
+                email.indexOf("@") > 0 &&
+                email.lastIndexOf(".") > email.indexOf("@");
 
     }
+
 
 }
