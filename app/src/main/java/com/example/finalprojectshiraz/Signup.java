@@ -2,6 +2,7 @@ package com.example.finalprojectshiraz;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,12 +17,15 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.finalprojectshiraz.data.usersTable.MyProfile;
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Signup extends AppCompatActivity {
     private Button btnAccount, btnGoogle, btmFacebook, btnLogin2;
     private TextView tvCreate, tvName, tvMass, tvPass, tvPhone, tvOr, tvEmail, tvSUW, tvLog;
     private EditText etMail, etName, etPhone, etAddress, editTextText, etPassword2, emailAddress;
-
+    private FirebaseAuth auth ;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -59,6 +63,7 @@ public class Signup extends AppCompatActivity {
         btnLogin2 = findViewById(R.id.btnLogin2);
 
         btnAccount = findViewById(R.id.btnAccount);
+
 
 
         btnAccount.setOnClickListener(new View.OnClickListener() {
@@ -126,4 +131,5 @@ public class Signup extends AppCompatActivity {
         }
         return isValid;
     }
-}
+
+    }
