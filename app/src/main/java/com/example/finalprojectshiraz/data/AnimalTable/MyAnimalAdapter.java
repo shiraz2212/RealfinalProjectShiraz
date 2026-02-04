@@ -22,7 +22,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class MyAnimalAdapter extends ArrayAdapter<Animal>
 {
     //המזהה של קובץ עיצוב הפריט
-    private final int itemLayout;
     /**
      * constructor
 
@@ -34,6 +33,7 @@ public class MyAnimalAdapter extends ArrayAdapter<Animal>
         super(context, resource);
         this.itemLayout = resource;
     }
+    private final int itemLayout;
 
     /**
      *
@@ -46,28 +46,37 @@ public class MyAnimalAdapter extends ArrayAdapter<Animal>
      */
 
     @NonNull
-
+    @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        //בניית הפריט הגרפי מתו קובץ העיצוב
+        // 1. Build the graphic item from the design file
         View vitem = convertView;
         if (vitem == null)
             vitem = LayoutInflater.from(getContext()).inflate(itemLayout, parent, false);
-        //קבלת הפניות לרכיבים בקובץ העיצוב
+
+        // 2. Get references to components in the design file
         ImageView imageView = vitem.findViewById(R.id.imgVitm);
-        TextView tvItemTitle = vitem.findViewById(R.id.tvItemTitle);
-        TextView tvItemText = vitem.findViewById(R.id.tvItemText);
-        TextView tvItemImportance = vitem.findViewById(R.id.tvItemImportance);
-        ImageButton imgBtnSendSms = vitem.findViewById(R.id.imgBtnSendSmsitm);
-        ImageButton imgBtnCall = vitem.findViewById(R.id.imgBtnCallitm);
-        ImageButton imgBtnEdit = vitem.findViewById(R.id.imgBtnEdititm);
-        ImageButton imgBtnDelete = vitem.findViewById(R.id.imgBtnDeleteitm);
-        //קבלת הנתון (עצם) הנוכחי
+        TextView tvTitle = vitem.findViewById(R.id.tvItmTitle);
+        TextView tvText = vitem.findViewById(R.id.tvItmText);
+        TextView tvImportance = vitem.findViewById(R.id.tvItemImportance);
+
+        ImageButton btnSendSMS = vitem.findViewById(R.id.imgBtnSendSmsitm);
+        ImageButton btnEdit = vitem.findViewById(R.id.imgBtnEdititm);
+        ImageButton btnCall = vitem.findViewById(R.id.imgBtnCallitm);
+        ImageButton btnDel = vitem.findViewById(R.id.imgBtnDeleteitm);
+
+        // 3. Get the current Animal object
         Animal current = getItem(position);
 
+        // 4. Display data on the graphic components
+        if (current != null) {
+            // Check your Animal.java file for these method names:
+            tvTitle.setText(current.getName()); // Usually getName() for Animals
+            tvText.setText(current.getBreed()); // Usually getBreed()
+            tvImportance.setText("Age: " + current.getAge()); // Usually getAge()
+        }
 
         return vitem;
     }
-
-    }
+}
 
 
