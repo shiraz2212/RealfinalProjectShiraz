@@ -16,16 +16,21 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.finalprojectshiraz.data.AppDatabase;
 import com.example.finalprojectshiraz.data.usersTable.MyProfile;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import io.reactivex.annotations.NonNull;
 
 public class Signup extends AppCompatActivity {
     private Button btnAccount, btnGoogle, btmFacebook, btnLogin2;
     private TextView tvCreate, tvName, tvMass, tvPass, tvPhone, tvOr, tvEmail, tvSUW, tvLog;
     private EditText etMail, etName, etPhone, etAddress, editTextText, etPassword2, emailAddress;
-    private FirebaseAuth auth ;
+    private FirebaseAuth auth;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -63,7 +68,6 @@ public class Signup extends AppCompatActivity {
         btnLogin2 = findViewById(R.id.btnLogin2);
 
         btnAccount = findViewById(R.id.btnAccount);
-
 
 
         btnAccount.setOnClickListener(new View.OnClickListener() {
@@ -121,15 +125,46 @@ public class Signup extends AppCompatActivity {
         } else {
             etPassword2.setError(null);
         }
-        if(isValid) {
+        if (isValid) {
+            MyProfile profile = new MyProfile();
+            profile.setFullName(name);
+            profile.setMail(email); // Check if your method is setMail or setEmail
+            profile.setPass(password);
 
+            FirebaseAuth auth = FirebaseAuth.getInstance();
+            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        // 1. Database operations MUST be in a background thread
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                AppDatabase db = AppDatabase.getDB(Signup.this);
+                                // Ensure your AppDatabase has a getProfileQuery() or similar method
+                           db.getProfile().insert(profile);
 
-            MyProfile user = new MyProfile();
-            user.setFullName(name);
-            user.setMail(email);
-            user.setPass(password);
+                                // 2. Update UI on the main thread
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(Signup.this, "Sign up Succeeded", Toast.LENGTH_SHORT).show();
+                                        finish(); // Close signup and go back
+                                    }
+                                });
+                            }
+                        }).start();
+                    } else {
+                        Toast.makeText(Signup.this, "Signing up Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        emailAddress.setError(task.getException().getMessage());
+                    }
+                }
+            });
         }
         return isValid;
     }
+}
 
-    }
+
+
+

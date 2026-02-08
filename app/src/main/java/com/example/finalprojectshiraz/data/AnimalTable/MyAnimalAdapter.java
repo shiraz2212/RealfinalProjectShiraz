@@ -55,9 +55,9 @@ public class MyAnimalAdapter extends ArrayAdapter<Animal>
 
         // 2. Get references to components in the design file
         ImageView imageView = vitem.findViewById(R.id.imgVitm);
-        TextView tvTitle = vitem.findViewById(R.id.tvItmTitle);
-        TextView tvText = vitem.findViewById(R.id.tvItmText);
-        TextView tvImportance = vitem.findViewById(R.id.tvItemImportance);
+        TextView tvItmTitle = vitem.findViewById(R.id.tvItmTitle);
+        TextView tvItmText = vitem.findViewById(R.id.tvItmText);
+        TextView tvItemImportance = vitem.findViewById(R.id.tvItemImportance);
 
         ImageButton btnSendSMS = vitem.findViewById(R.id.imgBtnSendSmsitm);
         ImageButton btnEdit = vitem.findViewById(R.id.imgBtnEdititm);
@@ -66,13 +66,16 @@ public class MyAnimalAdapter extends ArrayAdapter<Animal>
 
         // 3. Get the current Animal object
         Animal current = getItem(position);
+        tvItmTitle.setText(current.getName());
+        tvItmText.setText(current.getDescription());
+        tvItemImportance.setText("importance:"+current.getType());
 
         // 4. Display data on the graphic components
         if (current != null) {
             // Check your Animal.java file for these method names:
-            tvTitle.setText(current.getName()); // Usually getName() for Animals
-            tvText.setText(current.getBreed()); // Usually getBreed()
-            tvImportance.setText("Age: " + current.getAge()); // Usually getAge()
+            tvItmTitle.setText(current.getName()); // Usually getName() for Animals
+            tvItmText.setText(current.getBreed()); // Usually getBreed()
+            tvItemImportance.setText("Age: " + current.getAge()); // Usually getAge()
         }
 
         return vitem;

@@ -1,18 +1,28 @@
 package com.example.finalprojectshiraz;
 
+import static android.content.ContentValues.TAG;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.finalprojectshiraz.data.AnimalTable.Animal;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class AnimalDetails extends AppCompatActivity {
     private Button btnSubmit;
@@ -105,5 +115,43 @@ public class AnimalDetails extends AppCompatActivity {
         return isValid;
     }
 
+    public void saveUser(Animal miley) {// الحصول على مرجع إلى عقدة "users" في قاعدة البيانات
+
+        // تهيئة Firebase Realtime Database    //مؤشر لقاعدة البيانات
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+// ‏مؤشر لجدول المستعملين
+        DatabaseReference usersRef = database.child("users");
+        // إنشاء مفتاح فريد للمستخدم الجديد
+        DatabaseReference newUserRef = usersRef.push();
+        // تعيين معرف المستخدم في كائن MyUser
+        miley.setKeyid(newUserRef.getKey());
+        // حفظ بيانات المستخدم في قاعدة البيانات
+        //اضافة كائن "لمجموعة" المستعملين ومعالج حدث لفحص نجاح المطلوب
+
+        newUserRef.setValue(miley)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(AnimalDetails.this, "Succeeded to add User",  Toast.LENGTH_SHORT).show();
+                        finish();
+
+
+
+
+                        // تم حفظ البيانات بنجاح
+                        Log.d(TAG, "تم حفظ المستخدم بنجاح: " + miley.getKeyid());
+                        // تحديث واجهة المستخدم أو تنفيذ إجراءات أخرى
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // معالجة الأخطاء
+                        Log.e(TAG, "خطأ في حفظ المستخدم: " + e.getMessage(), e);
+                        Toast.makeText(AnimalDetails.this, "Failed to add User", Toast.LENGTH_SHORT).show();
+                        // عرض رسالة خطأ للمستخدم
+                    }
+                });
+    }
 
 }
