@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.finalprojectshiraz.data.AnimalTable.Animal;
 import com.example.finalprojectshiraz.data.AnimalTable.MyAnimalAdapter;
 import com.example.finalprojectshiraz.data.AppDatabase;
+import com.example.finalprojectshiraz.data.usersTable.MyProfile;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;

@@ -12,6 +12,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.finalprojectshiraz.data.AnimalTable.Animal;
+import com.example.finalprojectshiraz.data.AppDatabase;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class AnimalDetails extends AppCompatActivity {
@@ -23,7 +25,7 @@ public class AnimalDetails extends AppCompatActivity {
 
     private TextInputLayout tilVaccineDetails;
     private TextInputLayout tilNotes;
-    private CheckBox cbVaccinated;
+    private boolean Vaccinated=cbVaccinated.isChecked();
 
 
     @SuppressLint("MissingInflatedId")
@@ -45,9 +47,25 @@ public class AnimalDetails extends AppCompatActivity {
 
         tilVaccineDetails = findViewById(R.id.tilVaccineDetails);
         tilNotes = findViewById(R.id.tilNotes);
-        cbVaccinated = findViewById(R.id.cbVaccinated);
+       cbVaccinated = findViewById(R.id.cbVaccinated);
         btnSubmit.setOnClickListener(v -> {
             if (validateForm()) {
+
+                Animal animal = new Animal();
+                animal.setName(tilName.getEditText().getText().toString());
+                animal.setAge(tilAge.getEditText().getText().toString());
+                animal.setGender(tilGender.getEditText().getText().toString());
+                animal.setBreed(tilBreed.getEditText().getText().toString());
+                animal.setDescription(tilNotes.getEditText().getText().toString());
+
+                AppDatabase db = Room.databaseBuilder(
+                        getApplicationContext(),
+                        AppDatabase.class,
+                        "animal_db"
+                ).allowMainThreadQueries().build();
+
+                db.animalDao().insertAnimal(animal);
+
                 Intent intent = new Intent(AnimalDetails.this, HomeScreen.class);
                 startActivity(intent);
             }

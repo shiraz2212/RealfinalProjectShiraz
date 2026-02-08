@@ -54,8 +54,8 @@ public class MyAnimalAdapter extends ArrayAdapter<Animal>
             vitem = LayoutInflater.from(getContext()).inflate(itemLayout, parent, false);
         //קבלת הפניות לרכיבים בקובץ העיצוב
         ImageView imageView = vitem.findViewById(R.id.imgVitm);
-        TextView tvItemTitle = vitem.findViewById(R.id.tvItemTitle);
-        TextView tvItemText = vitem.findViewById(R.id.tvItemText);
+        TextView tvItmTitle = vitem.findViewById(R.id.tvItmTitle);
+        TextView tvItmText = vitem.findViewById(R.id.textView4);
         TextView tvItemImportance = vitem.findViewById(R.id.tvItemImportance);
         ImageButton imgBtnSendSms = vitem.findViewById(R.id.imgBtnSendSmsitm);
         ImageButton imgBtnCall = vitem.findViewById(R.id.imgBtnCallitm);
@@ -63,6 +63,9 @@ public class MyAnimalAdapter extends ArrayAdapter<Animal>
         ImageButton imgBtnDelete = vitem.findViewById(R.id.imgBtnDeleteitm);
         //קבלת הנתון (עצם) הנוכחי
         Animal current = getItem(position);
+        tvItmTitle.setText(current.getName());
+        tvItmText.setText(current.getDescription());
+        tvItemImportance.setText("Importance: " + current.getType());
 
 
         return vitem;
