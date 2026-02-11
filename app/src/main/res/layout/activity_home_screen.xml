@@ -114,10 +114,10 @@
         android:layout_marginBottom="16dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/etSearch"
         app:layout_constraintBottom_toTopOf="@+id/btn3"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/etSearch" />
     <ImageView
         android:id="@+id/settingsVector"
         android:layout_width="0dp"
