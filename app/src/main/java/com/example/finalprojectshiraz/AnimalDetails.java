@@ -18,6 +18,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.finalprojectshiraz.data.AnimalTable.Animal;
+import com.example.finalprojectshiraz.data.AppDatabase;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;
@@ -76,9 +77,9 @@ public class AnimalDetails extends AppCompatActivity {
         String age = tilAge.getEditText().getText().toString().trim();
         String gender = tilGender.getEditText().getText().toString().trim();
         String breed = tilBreed.getEditText().getText().toString().trim();
-        String vaccineDetails = tilVaccineDetails.getEditText().getText().toString().trim();
-        String notes = tilNotes.getEditText().getText().toString().trim();
-        boolean vaccinated = cbVaccinated.isChecked();
+      //  String vaccineDetails = tilVaccineDetails.getEditText().getText().toString().trim();
+       // String notes = tilNotes.getEditText().getText().toString().trim();
+    //    boolean vaccinated = cbVaccinated.isChecked();
 
         // Validate each field
         if (name.isEmpty()) {
@@ -105,13 +106,23 @@ public class AnimalDetails extends AppCompatActivity {
         } else {
             tilBreed.setError(null);
         }
-        if (vaccineDetails.isEmpty() && !vaccinated) {
-            isValid = false;
-            tilVaccineDetails.setError("Vaccine Details or Vaccinated must be provided");
-        } else {
-            tilVaccineDetails.setError(null);
-        }
+//        if (vaccineDetails.isEmpty() && !vaccinated) {
+//            isValid = false;
+//            tilVaccineDetails.setError("Vaccine Details or Vaccinated must be provided");
+//        } else {
+//            tilVaccineDetails.setError(null);
+//        }
 
+        if (isValid)
+        {
+            Animal a=new Animal();
+            a.setAge(age);
+            a.setName(name);
+            a.setBreed(breed);
+            a.setGender(gender);
+            AppDatabase.getDB(this).animalQuery().insert(a);
+            saveUser(a);
+        }
         return isValid;
     }
 
@@ -120,7 +131,7 @@ public class AnimalDetails extends AppCompatActivity {
         // تهيئة Firebase Realtime Database    //مؤشر لقاعدة البيانات
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 // ‏مؤشر لجدول المستعملين
-        DatabaseReference usersRef = database.child("users");
+        DatabaseReference usersRef = database.child("animals");
         // إنشاء مفتاح فريد للمستخدم الجديد
         DatabaseReference newUserRef = usersRef.push();
         // تعيين معرف المستخدم في كائن MyUser

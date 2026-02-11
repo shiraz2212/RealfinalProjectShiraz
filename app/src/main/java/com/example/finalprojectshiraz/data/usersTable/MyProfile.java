@@ -6,6 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 @Entity
 public class MyProfile {
+    String userId;
     public void setPassw(String passw) {
         this.passw = passw;
     }
@@ -71,5 +72,13 @@ public class MyProfile {
 
     public String getPassw() {
         return passw;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 }

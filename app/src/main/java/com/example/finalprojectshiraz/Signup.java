@@ -149,8 +149,8 @@ public class Signup extends AppCompatActivity {
                             public void run() {
                                 AppDatabase db = AppDatabase.getDB(Signup.this);
                                 // Ensure your AppDatabase has a getProfileQuery() or similar method
-                           db.getProfile().insert(profile);
-
+                                db.getProfile().insert(profile);
+                                saveUser(profile);
                                 // 2. Update UI on the main thread
                                 runOnUiThread(new Runnable() {
                                     @Override
@@ -171,42 +171,14 @@ public class Signup extends AppCompatActivity {
         return isValid;
     }
 
-    public class MyUser {
-
-        private String userId; // معرف فريد للمستخدم(يمكن أن يكون فارغًا في البداية)
-        private String name;
-        private String email;
 
 
-        // دالة إنشاء افتراضية (مطلوبة بواسطة Firebase)
-        public MyUser() {}
-
-
-        public MyUser(String name, String email) {
-            this.name = name;
-            this.email = email;
-        }
-
-
-        public String getUserId() { return userId; }
-        public void setUserId(String userId) { this.userId = userId; }
-
-
-        public String getName() { return name; }
-        public void setName(String name) { this.name = name; }
-
-
-        public String getEmail() { return email; }
-        public void setEmail(String email) { this.email = email; }
-
-    }
-
-    public void saveUser(MyUser user) {// الحصول على مرجع إلى عقدة "users" في قاعدة البيانات
+    public void saveUser(MyProfile user) {// الحصول على مرجع إلى عقدة "users" في قاعدة البيانات
 
         // تهيئة Firebase Realtime Database    //مؤشر لقاعدة البيانات
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 // ‏مؤشر لجدول المستعملين
-        DatabaseReference usersRef = database.child("users");
+        DatabaseReference usersRef = database.child("profiles");
         // إنشاء مفتاح فريد للمستخدم الجديد
         DatabaseReference newUserRef = usersRef.push();
         // تعيين معرف المستخدم في كائن MyUser

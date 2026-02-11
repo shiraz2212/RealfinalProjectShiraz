@@ -59,10 +59,10 @@ public class MyAnimalAdapter extends ArrayAdapter<Animal>
         TextView tvItmText = vitem.findViewById(R.id.tvItmText);
         TextView tvItemImportance = vitem.findViewById(R.id.tvItemImportance);
 
-        ImageButton btnSendSMS = vitem.findViewById(R.id.imgBtnSendSmsitm);
-        ImageButton btnEdit = vitem.findViewById(R.id.imgBtnEdititm);
-        ImageButton btnCall = vitem.findViewById(R.id.imgBtnCallitm);
-        ImageButton btnDel = vitem.findViewById(R.id.imgBtnDeleteitm);
+//        ImageButton btnSendSMS = vitem.findViewById(R.id.imgBtnSendSmsit/m);
+//        ImageButton btnEdit = vitem.findViewById(R.id.imgBtnEdititm);
+//        ImageButton btnCall = vitem.findViewById(R.id.imgBtnCallitm);
+//        ImageButton btnDel = vitem.findViewById(R.id.imgBtnDeleteitm);
 
         // 3. Get the current Animal object
         Animal current = getItem(position);

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -17,6 +18,11 @@ import androidx.room.Room;
 
 import com.example.finalprojectshiraz.data.AppDatabase;
 import com.example.finalprojectshiraz.data.usersTable.MyProfile;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LogIn extends AppCompatActivity {
     private TextView tvLogin;
@@ -37,6 +43,13 @@ public class LogIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_log_in);
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(currentUser!=null)
+        {
+            Intent intent = new Intent(LogIn.this, HomeScreen.class);
+            startActivity(intent);
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -62,10 +75,10 @@ public class LogIn extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // if (validateInputs()) {
+                validateInputs();
+                // if () {
                 // Only proceed to HomeScreen if inputs are valid
-                Intent intent = new Intent(LogIn.this, HomeScreen.class);
-                startActivity(intent);
+
             }
             //  }
         });
@@ -101,14 +114,15 @@ public class LogIn extends AppCompatActivity {
             tvEnterPass.setError(null);
         }
         if (isValid) {
-            AppDatabase db = AppDatabase.getDB(getApplicationContext());
-            MyProfile profile = db.getProfile().checkEmail(email);
-            if (profile != null && profile.getPassw().equals(password)) {
-                Intent intent = new Intent(LogIn.this, HomeScreen.class);
-                startActivity(intent);
-            } else {
-                Toast.makeText(LogIn.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
-            }
+            signIn(email,password);
+//            AppDatabase db = AppDatabase.getDB(getApplicationContext());
+//            MyProfile profile = db.getProfile().checkEmail(email);
+//            if (profile != null && profile.getPassw().equals(password)) {
+//                Intent intent = new Intent(LogIn.this, HomeScreen.class);
+//                startActivity(intent);
+//            } else {
+//                Toast.makeText(LogIn.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+//            }
         }
         return isValid;
     }
@@ -123,6 +137,35 @@ public class LogIn extends AppCompatActivity {
                 email.indexOf("@") > 0 &&
                 email.lastIndexOf(".") > email.indexOf("@");
 
+    }
+
+
+    private void signIn(String email, String password) {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(LogIn.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
+    }
+
+    private void updateUI(FirebaseUser user) {
+        if (user != null) {
+            Intent intent = new Intent(LogIn.this, HomeScreen.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
 
