@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "168578910023",
+    "project_id": "finalprojectshiraz-95ed8",
+    "storage_bucket": "finalprojectshiraz-95ed8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:168578910023:android:d072fdb53a216f95396e62",
+        "android_client_info": {
+          "package_name": "com.example.finalprojectshiraz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmT6MNOJT0tOKkpa4zZn9KiFDgVGX_ToE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
