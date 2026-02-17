@@ -11,6 +11,8 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -36,6 +38,12 @@ public class AnimalDetails extends AppCompatActivity {
     private TextInputLayout tilNotes;
     private CheckBox cbVaccinated;
 
+    // مُشغّلات لطلب الأذونات
+    private ActivityResultLauncher<String> requestReadMediaImagesPermission;
+    private ActivityResultLauncher<String> requestReadMediaVideoPermission;
+    private ActivityResultLauncher<String> requestReadExternalStoragePermission;
+
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -48,6 +56,55 @@ public class AnimalDetails extends AppCompatActivity {
 //            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 //            return insets;
 //        });
+        requestReadMediaImagesPermission = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+            if (isGranted) {
+                Log.d(TAG, "READ_MEDIA_IMAGES permission granted");
+                Toast.makeText(this, "تم منح إذن قراءة الصور", Toast.LENGTH_SHORT).show();
+                // يمكنك الآن المتابعة بالعملية التي تتطلب هذا الإذن
+            } else {
+                Log.d(TAG, "READ_MEDIA_IMAGES permission denied");
+                Toast.makeText(this, "تم رفض إذن قراءة الصور", Toast.LENGTH_SHORT).show();
+                // التعامل مع حالة رفض الإذن
+            }
+        });
+        requestReadMediaVideoPermission = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+            if (isGranted) {
+                Log.d(TAG, "READ_MEDIA_VIDEO permission granted");
+                Toast.makeText(this, "تم منح إذن قراءة الفيديو", Toast.LENGTH_SHORT).show();
+                // يمكنك الآن المتابعة بالعملية التي تتطلب هذا الإذن
+            } else {
+                Log.d(TAG, "READ_MEDIA_VIDEO permission denied");
+                Toast.makeText(this, "تم رفض إذن قراءة الفيديو", Toast.LENGTH_SHORT).show();
+                // التعامل مع حالة رفض الإذن
+            }
+        });
+        requestReadExternalStoragePermission = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+            if (isGranted) {
+                Log.d(TAG, "READ_EXTERNAL_STORAGE permission granted");
+                Toast.makeText(this, "تم منح إذن قراءة التخزين الخارجي", Toast.LENGTH_SHORT).show();
+                // يمكنك الآن المتابعة بالعملية التي تتطلب هذا الإذن
+            } else {
+                Log.d(TAG, "READ_EXTERNAL_STORAGE permission denied");
+                Toast.makeText(this, "تم رفض إذن قراءة التخزين الخارجي", Toast.LENGTH_SHORT).show();
+                // التعامل مع حالة رفض الإذن
+            }
+        });
+        requestReadExternalStoragePermission = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+            if (isGranted) {
+                Log.d(TAG, "READ_EXTERNAL_STORAGE permission granted");
+                Toast.makeText(this, "تم منح إذن قراءة التخزين الخارجي", Toast.LENGTH_SHORT).show();
+                // يمكنك الآن المتابعة بالعملية التي تتطلب هذا الإذن
+            } else {
+                Log.d(TAG, "READ_EXTERNAL_STORAGE permission denied");
+                Toast.makeText(this, "تم رفض إذن قراءة التخزين الخارجي", Toast.LENGTH_SHORT).show();
+                // التعامل مع حالة رفض الإذن
+            }
+        });
+//استدعاء دالة الفحص (سيتم تطبيقها لاحقا)
+    //    checkAndRequestPermissions();
+
+
+
         btnSubmit = findViewById(R.id.btnSubmit);
         tilName = findViewById(R.id.tilName);
         tilAge = findViewById(R.id.tilAge);
@@ -162,6 +219,7 @@ public class AnimalDetails extends AppCompatActivity {
                         Toast.makeText(AnimalDetails.this, "Failed to add User", Toast.LENGTH_SHORT).show();
                         // عرض رسالة خطأ للمستخدم
                     }
+
                 });
     }
 
