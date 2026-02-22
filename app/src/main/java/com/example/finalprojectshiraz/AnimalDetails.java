@@ -4,17 +4,24 @@ import static android.content.ContentValues.TAG;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -33,6 +40,10 @@ public class AnimalDetails extends AppCompatActivity {
     private TextInputLayout tilAge;
     private TextInputLayout tilGender;
     private TextInputLayout tilBreed;
+    private ImageView ivAnimalImage; //صفة كمؤشر لهذا الكائن
+
+    private Uri selectedImageUri;//صفة لحفظ عنوان الصورة بعد اختيارها
+    private ActivityResultLauncher<String> pickImage;// ‏كائن لطلب الصورة من الهاتف
 
     private TextInputLayout tilVaccineDetails;
     private TextInputLayout tilNotes;
@@ -42,6 +53,50 @@ public class AnimalDetails extends AppCompatActivity {
     private ActivityResultLauncher<String> requestReadMediaImagesPermission;
     private ActivityResultLauncher<String> requestReadMediaVideoPermission;
     private ActivityResultLauncher<String> requestReadExternalStoragePermission;
+    // دالة لفحص وطلب الأذونات
+    private void checkAndRequestPermissions() {
+        // فحص وطلب إذن READ_MEDIA_IMAGES (للإصدارات الحديثة)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // أندرويد 13+
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_MEDIA_IMAGES)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestReadMediaImagesPermission.launch(android.Manifest.permission.READ_MEDIA_IMAGES);
+            } else {
+                Log.d(TAG, "READ_MEDIA_IMAGES permission already granted");
+                Toast.makeText(this, "إذن قراءة الصور ممنوح بالفعل", Toast.LENGTH_SHORT).show();
+            }
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) { // أندرويد 10 و 11 و 12// على هذه الإصدارات، READ_EXTERNAL_STORAGE له سلوك مختلف
+            // إذا كنت تستخدم Scoped Storage بشكل صحيح، قد لا تحتاج إلى هذا الإذن
+            // ولكن إذا كنت تحتاج إلى الوصول إلى جميع الصور، فقد تحتاج إلى READ_EXTERNAL_STORAGE
+            // في هذا المثال، سنفحص READ_EXTERNAL_STORAGE للإصدارات الأقدم من 13
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestReadExternalStoragePermission.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE);
+            } else {
+                Log.d(TAG, "READ_EXTERNAL_STORAGE permission already granted (for older versions)");
+                Toast.makeText(this, "إذن قراءة التخزين ممنوح بالفعل (للإصدارات الأقدم)", Toast.LENGTH_SHORT).show();
+            }
+        } else { // أندرويد 9 والإصدارات الأقدم
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestReadExternalStoragePermission.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE);
+            } else {
+                Log.d(TAG, "READ_EXTERNAL_STORAGE permission already granted (for older versions)");
+                Toast.makeText(this, "إذن قراءة التخزين ممنوح بالفعل (للإصدارات الأقدم)", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+        // فحص وطلب إذن READ_MEDIA_VIDEO (للإصدارات الحديثة)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // أندرويد 13+
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_MEDIA_VIDEO)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestReadMediaVideoPermission.launch(android.Manifest.permission.READ_MEDIA_VIDEO);
+            } else {
+                Log.d(TAG, "READ_MEDIA_VIDEO permission already granted");
+                Toast.makeText(this, "إذن قراءة الفيديو ممنوح بالفعل", Toast.LENGTH_SHORT).show();
+            }
+        }// ملاحظة: إذن INTERNET لا يحتاج إلى فحص أو
+    }
 
 
 
@@ -51,11 +106,30 @@ public class AnimalDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_animal_details);
+
+// Initialize the ActivityResultLauncher for picking images
+        pickImage = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+            @Override
+            public void onActivityResult(Uri result) {
+                if (result != null) {
+                    selectedImageUri = result;
+                    ivAnimalImage.setImageURI(result);
+                    ivAnimalImage.setVisibility(View.VISIBLE);
 //        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
 //            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
 //            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 //            return insets;
 //        });
+                }
+            }
+        });
+        ivAnimalImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pickImage.launch("image/*"); // Launch the image picker
+            }
+        });
+
         requestReadMediaImagesPermission = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
             if (isGranted) {
                 Log.d(TAG, "READ_MEDIA_IMAGES permission granted");
