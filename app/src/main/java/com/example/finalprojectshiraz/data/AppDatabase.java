@@ -11,7 +11,7 @@ import com.example.finalprojectshiraz.data.AnimalTable.AnimalQuery;
 import com.example.finalprojectshiraz.data.usersTable.MyProfile;
 import com.example.finalprojectshiraz.data.usersTable.MyProfileQuery;
 
-@Database(entities = {MyProfile.class, Animal.class}, version = 1)
+@Database(entities = {MyProfile.class, Animal.class}, version = 2)
 /**
  * الفئة المسؤولة عن بناء قاعدة البيانات بكل جداولها
  * وتوفر لنا كائن للتعامل مع قاعدة البيانات
@@ -45,18 +45,22 @@ public abstract class AppDatabase extends RoomDatabase {
      */
     public static AppDatabase getDB(Context context) {
         if (db == null) {
-            db = Room.databaseBuilder(context, AppDatabase.class, "myDatabase")//بناء قاعدة البيانات واعادة كائن يؤشر عليها
+            db = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "myDatabase")
+                    // يسمح بحذف البيانات القديمة وانشاء قاعدة بيانات جديدة عند تغيير الاصدار
                     .allowMainThreadQueries()
                     .build();
         }
         return db;
 
     }
-
+//public MyProfileQuery getProfile()
+//{
+//    return myProfileQuery();
+//}
 
     public abstract MyProfileQuery getProfile();
+
+    /**
+     * “يا Room، أنا عندي DAO اسمه MyProfileQuery، وانت بدك تولّد الكود الحقيقي تبعه”
+     */
 }
-
-
-
-

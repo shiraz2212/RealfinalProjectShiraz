@@ -10,10 +10,10 @@
 
     <ImageView
         android:id="@+id/ivAnimalImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="20dp"
+        android:layout_margin="5dp"
         android:background="#F5F5F5"
         android:scaleType="centerCrop"
         android:src="@android:drawable/ic_menu_camera" />
@@ -42,7 +42,7 @@
                 android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="50dp"
+                android:layout_margin="5dp"
                 android:inputType="textPersonName"
                 android:maxLines="1"
                 tools:layout_editor_absoluteX="39dp"
@@ -60,7 +60,7 @@
                 android:id="@+id/etBreed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="50dp"
+                android:layout_margin="5dp"
                 android:inputType="text"
                 android:maxLines="1"
                 tools:layout_editor_absoluteX="59dp"
@@ -77,8 +77,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etAge"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="50dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:inputType="number"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -94,7 +94,7 @@
                 android:id="@+id/actvGender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="50dp"
+                android:layout_margin="5dp"
                 android:gravity="center_vertical"
                 android:inputType="none"
                 android:text="Select Gender" />
@@ -112,7 +112,7 @@
             android:textStyle="bold" />
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/cbVaccinated"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="CheckBox" />
@@ -139,6 +139,9 @@
             android:text="Save Animal Details"
             android:textAllCaps="false"
             android:textSize="14sp"
-            app:cornerRadius="8dp" />
+            app:cornerRadius="8dp"
+            tools:ignore="TouchTargetSizeCheck" />
+
     </LinearLayout>
+
 </LinearLayout>

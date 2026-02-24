@@ -6,7 +6,28 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 @Entity
 public class MyProfile {
-    @PrimaryKey(autoGenerate = true)//تحديد الصفة كمفتاح رئيسي والذي يُنتجح بشكل تلقائي
+    String userId;
+    public void setPassw(String passw) {
+        this.passw = passw;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @PrimaryKey(autoGenerate = true)//تحديد الصفة كمفتاح رئيسي والذي يُنتج بشكل تلقائي
     public long keyid;
     @ColumnInfo(name = "full_Name")//اعطاء اسم جديد للعامود-الصفة في الجدول
     public String fullName;
@@ -51,5 +72,13 @@ public class MyProfile {
 
     public String getPassw() {
         return passw;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 }

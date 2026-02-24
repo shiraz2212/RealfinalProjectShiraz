@@ -16,14 +16,20 @@ public class Adoption extends AppCompatActivity {
      *
      * @param savedInstanceState هذا المتغير لاستدعاء الكلاس الأب للنموذج الذي تم انشاءه فيه
      */
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_adoption);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+    protected void onCreate(Bundle savedInstanceState) { // أول دالة يتم تنفيذها عند فتح الشاشة
+        super.onCreate(savedInstanceState);//استدعاء دالة الأب - ضروري حتى يجهّز النظام الشاشة بشكل صحيح
+        EdgeToEdge.enable(this);//يفعّل العرض بكامل الشاشة
+        setContentView(R.layout.activity_adoption);//ربط هذه الشاشة بملف التصميم XML
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> { //الهدف: منع تداخل المحتوى مع أزرار النظام
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());// -حصل على أبعاد شريط الحالة وشريط التنقل
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);// ضيف Padding حسب أبعاد النظام حتى لا يغطي شريط النظام محتوى الشاشة
+            return insets;//نعيد القيم بعد تعديلها
         });
     }
+    /**
+     * هاي أول دالة بتشتغل لما شاشة التبنّي تنفتح
+     * يهيّئ شاشة Adoption
+     * يربطها بالـ XML
+     *  يضبط العرض الكامل والحواف
+     */
 }

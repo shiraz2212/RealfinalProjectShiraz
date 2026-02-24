@@ -72,7 +72,13 @@
                 android:inputType="textPostalAddress"
                 android:maxLines="2"/>
         </com.google.android.material.textfield.TextInputLayout>
-        
+
+        <Button
+            android:id="@+id/btnReport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save Report" />
+
         <!-- We'll add more fields in the next steps -->
         
     </LinearLayout>

@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <ImageView
@@ -30,7 +30,7 @@
                 android:text="For title" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/tvItmText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="For text" />

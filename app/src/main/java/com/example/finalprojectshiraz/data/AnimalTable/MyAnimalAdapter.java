@@ -55,7 +55,7 @@ public class MyAnimalAdapter extends ArrayAdapter<Animal>
         //קבלת הפניות לרכיבים בקובץ העיצוב
         ImageView imageView = vitem.findViewById(R.id.imgVitm);
         TextView tvItmTitle = vitem.findViewById(R.id.tvItmTitle);
-        TextView tvItmText = vitem.findViewById(R.id.textView4);
+        TextView tvItmText = vitem.findViewById(R.id.tvItmText);
         TextView tvItemImportance = vitem.findViewById(R.id.tvItemImportance);
         ImageButton imgBtnSendSms = vitem.findViewById(R.id.imgBtnSendSmsitm);
         ImageButton imgBtnCall = vitem.findViewById(R.id.imgBtnCallitm);
