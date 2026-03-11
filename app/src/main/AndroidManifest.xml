@@ -31,9 +31,7 @@
         <activity
             android:name=".AnimalDetails"
             android:exported="false" />
-        <activity
-            android:name=".Report"
-            android:exported="false" />
+
         <activity
             android:name=".Adoption"
             android:exported="false" />

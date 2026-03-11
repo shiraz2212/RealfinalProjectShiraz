@@ -1,3 +1,4 @@
+// تحديد الحزمة الخاصة بالشاشة الرئيسية
 package com.example.finalprojectshiraz;
 
 import android.annotation.SuppressLint;
@@ -11,137 +12,172 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+// لتفعيل عرض Edge-To-Edge (الشاشة كاملة)
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+// استيراد كلاس Animal (يمثل جدول الحيوانات في قاعدة البيانات)
 import com.example.finalprojectshiraz.data.AnimalTable.Animal;
+
+// استيراد Adapter المخصص لعرض الحيوانات داخل ListView
 import com.example.finalprojectshiraz.data.AnimalTable.MyAnimalAdapter;
+
+// استيراد قاعدة البيانات المحلية Room
 import com.example.finalprojectshiraz.data.AppDatabase;
-import com.example.finalprojectshiraz.data.usersTable.MyProfile;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+
 /**
  * شاشة الصفحة الرئيسية HomeScreen
- * تعرض قائمة الحيوانات، أزرار للتنقل إلى شاشات أخرى، وواجهة Edge-to-Edge
+ * وظيفتها:
+ * - عرض قائمة الحيوانات
+ * - التنقل بين الشاشات (إضافة، تبني، تقارير، إعدادات)
  */
 public class HomeScreen extends AppCompatActivity {
-    private Button btn3;
-    private TextView tvH;
 
+    // أزرار التنقل
+    private Button btn3;          // زر إضافة حيوان
+    private Button btnReport;     // زر التقارير
+    private Button btnLocation;   // زر الموقع (غير مستخدم حالياً)
+    private Button btnAdoption;   // زر التبني
+
+    // عناصر نصية
+    private TextView tvH;
     private TextView tv13;
-    private Button btnReport;
-    private Button btnLocation;
-    private Button btnAdoption;
     private TextView tvLocation;
 
+    // قائمة اختيار نوع الحيوان (غير مستخدمة حالياً)
     private Spinner spnrAnimalType;
-    private FloatingActionButton fabAddAnimal;//إضافة حيوان جديد
 
-private ListView lstvAnimals;//القائمة اللي بتعرض الحيوانات
-private MyAnimalAdapter adapterAnimals;//ربط البيانات بالواجهة
+    // زر عائم لإضافة حيوان (غير مستخدم حالياً)
+    private FloatingActionButton fabAddAnimal;
+
+    // ListView لعرض الحيوانات
+    private ListView lstvAnimals;
+
+    // Adapter لربط البيانات بالـ ListView
+    private MyAnimalAdapter adapterAnimals;
+
+    // أيقونة الإعدادات
     private ImageView settingsVector;
 
-
-
     /**
-     * الدالة onCreate: تُستدعى أول مرة عند فتح الشاشة
+     * onCreate
+     * تُستدعى أول مرة عند فتح الشاشة
      */
     @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate(Bundle savedInstanceState) { //onCreate → أول دالة تُستدعى عند فتح الشاشة
-        super.onCreate(savedInstanceState);//لازم تستدعيها عشان Activity تشتغل بشكل طبيعي
-        EdgeToEdge.enable(this);//لتمكين عرض الشاشة بالكامل خلف الـ status bar و navigation bar
-        setContentView(R.layout.activity_home_screen);//كل العناصر اللي عرّفناها (Button, TextView, ListView) موجودة في هذا XML
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+
+        // تفعيل العرض بالحواف (Edge-To-Edge)
+        EdgeToEdge.enable(this);
+
+        // ربط ملف التصميم XML
+        setContentView(R.layout.activity_home_screen);
+
+        // ربط الـ ListView من XML
         lstvAnimals = findViewById(R.id.lstvAnimals);
-        adapterAnimals = new MyAnimalAdapter(this, R.layout.task_item_layout);//هون عم تنشئ Adapter جديد من الكلاس MyAnimalAdapter.
-        lstvAnimals.setAdapter(adapterAnimals);//
-        // السطرين هدول وظيفتهم ربط البيانات مع الـ ListView حتى تنعرض على الشاشة
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> { ////الهدف: منع تداخل المحتوى مع أزرار النظام
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());//// -حصل على أبعاد شريط الحالة وشريط التنقل
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);//;// ضيف Padding حسب أبعاد النظام حتى لا يغطي شريط النظام محتوى الشاشة
-            return insets;
-//يهيئ Activity
-//
-//يجعلها Edge-to-Edge (عرض كامل للشاشة)
-//
-//يضمن أن كل العناصر داخل الشاشة ما تتداخل مع status/navigation bars
-        });
-        lstvAnimals=findViewById(R.id.lstvAnimals);
+
+        // إنشاء Adapter جديد
+        adapterAnimals = new MyAnimalAdapter(this, R.layout.task_item_layout);
+
+        // ربط الـ Adapter بالـ ListView
+        lstvAnimals.setAdapter(adapterAnimals);
+
+        /**
+         * منع تداخل المحتوى مع شريط الحالة وشريط التنقل
+         */
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main),
+                (v, insets) -> {
+
+                    Insets systemBars =
+                            insets.getInsets(WindowInsetsCompat.Type.systemBars());
+
+                    // إضافة Padding حسب حجم أشرطة النظام
+                    v.setPadding(systemBars.left,
+                            systemBars.top,
+                            systemBars.right,
+                            systemBars.bottom);
+
+                    return insets;
+                });
+
+        // ربط بقية عناصر الواجهة
         btnReport = findViewById(R.id.btnReport);
         btnLocation = findViewById(R.id.btnLocation);
         btnAdoption = findViewById(R.id.btnAdoption);
         btn3 = findViewById(R.id.btn3);
         tvH = findViewById(R.id.tvH);
-        settingsVector=findViewById(R.id.settingsVector);
+        settingsVector = findViewById(R.id.settingsVector);
 
-
-
-        // عند الضغط على زر btn3 → فتح شاشة إضافة حيوان جديد
-        btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomeScreen.this, AnimalDetails.class);
-                startActivity(intent);
-            }
+        /**
+         * عند الضغط على زر إضافة حيوان
+         * الانتقال إلى شاشة AnimalDetails
+         */
+        btn3.setOnClickListener(view -> {
+            Intent intent =
+                    new Intent(HomeScreen.this, AnimalDetails.class);
+            startActivity(intent);
         });
 
-        // عند الضغط على زر btnReport → فتح شاشة التقارير
-        btnReport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomeScreen.this, Report.class);
-                startActivity(intent);
-            }
+        /**
+         * عند الضغط على زر التقارير
+         */
+        btnReport.setOnClickListener(view -> {
+            Intent intent =
+                    new Intent(HomeScreen.this, Report.class);
+            startActivity(intent);
         });
 
-
-        // عند الضغط على زر btnAdoption → فتح شاشة التبني
-        btnAdoption.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomeScreen.this, Adoption.class);
-                startActivity(intent);
-            }
+        /**
+         * عند الضغط على زر التبني
+         */
+        btnAdoption.setOnClickListener(view -> {
+            Intent intent =
+                    new Intent(HomeScreen.this, Adoption.class);
+            startActivity(intent);
         });
 
-        // عند الضغط على أيقونة الإعدادات → فتح شاشة الإعدادات
-        settingsVector.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomeScreen.this, Settings.class);
-                startActivity(intent);
-            }
-        });
-        // عند الضغط على أيقونة الإعدادات → فتح شاشة الإعدادات
-        settingsVector.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomeScreen.this, Settings.class);
-                startActivity(intent);
-            }
+        /**
+         * عند الضغط على أيقونة الإعدادات
+         */
+        settingsVector.setOnClickListener(view -> {
+            Intent intent =
+                    new Intent(HomeScreen.this, Settings.class);
+            startActivity(intent);
         });
     }
 
     /**
-     * دالة onResume: تُستدعى عند العودة للشاشة
-     * لتحديث قائمة الحيوانات بعرض البيانات الحالية من قاعدة البيانات
+     * onResume
+     * تُستدعى عند الرجوع إلى الشاشة
+     * لتحديث البيانات المعروضة في القائمة
      */
     @Override
     protected void onResume() {
+
         super.onResume();
-        //استخراج المعطيات من قاعدة البيانات
-        List<Animal> allAnimal= AppDatabase.getDB(this).animalQuery().getAllAnimal();
-        //تنظيف المنسق من جميع المعطيات السابقة
+
+        // جلب جميع الحيوانات من قاعدة البيانات
+        List<Animal> allAnimal =
+                AppDatabase.getDB(this)
+                        .animalQuery()
+                        .getAllAnimal();
+
+        // تنظيف البيانات القديمة من الـ Adapter
         adapterAnimals.clear();
 
-        // إضافة جميع الحيوانات الجديدة
+        // إضافة البيانات الجديدة
         adapterAnimals.addAll(allAnimal);
 
-        // إعلام الـ ListView بتحديث البيانات
+        // تحديث العرض في ListView
         adapterAnimals.notifyDataSetChanged();
     }
 }

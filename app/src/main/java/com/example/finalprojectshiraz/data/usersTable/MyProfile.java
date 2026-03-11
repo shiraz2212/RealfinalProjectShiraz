@@ -4,6 +4,7 @@ package com.example.finalprojectshiraz.data.usersTable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
 @Entity
 public class MyProfile {
     String userId;
