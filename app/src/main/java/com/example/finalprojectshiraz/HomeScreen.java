@@ -130,11 +130,6 @@ public class HomeScreen extends AppCompatActivity {
         /**
          * عند الضغط على زر التقارير
          */
-        btnReport.setOnClickListener(view -> {
-            Intent intent =
-                    new Intent(HomeScreen.this, Report.class);
-            startActivity(intent);
-        });
 
         /**
          * عند الضغط على زر التبني

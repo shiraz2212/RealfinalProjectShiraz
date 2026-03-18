@@ -7,9 +7,11 @@ import androidx.room.Entity;
 // استيراد Annotation لتحديد المفتاح الأساسي في الجدول
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 // تعريف هذا الكلاس كـ Entity (أي جدول) داخل قاعدة بيانات Room
 @Entity
-public class Animal {
+public class Animal  implements Serializable {
 
     // تعريف المفتاح الأساسي للجدول مع توليد تلقائي للقيمة
     @PrimaryKey(autoGenerate = true)

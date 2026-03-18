@@ -1,0 +1,387 @@
+@startuml
+class com.example.finalprojectshiraz.Report {
+- Button btnReport
+# void onCreate(Bundle)
+}
+
+
+abstract class com.example.finalprojectshiraz.data.AppDatabase {
+- {static} AppDatabase db
++ {abstract}AnimalQuery animalQuery()
++ {static} AppDatabase getDB(Context)
++ {abstract}MyProfileQuery getProfile()
+}
+
+note left of com.example.finalprojectshiraz.data.AppDatabase::animalQuery()
+
+     * @return الـ query للجدول الخاص بالمستخدمين
+     
+end note
+note right of com.example.finalprojectshiraz.data.AppDatabase::getDB(Context)
+
+     * بناء قاعدة البيانات واعادة كائن يؤشر عليها
+     *
+     * @param context
+     * @return
+     
+end note
+
+class com.example.finalprojectshiraz.data.AnimalTable.MyAnimalAdapter {
+- int itemLayout
++ View getView(int,View,ViewGroup)
+}
+note left of com.example.finalprojectshiraz.data.AnimalTable.MyAnimalAdapter::itemLayout
+המזהה של קובץ עיצוב הפריט
+end note
+
+
+class com.example.finalprojectshiraz.AnimalDetails {
+- Button btnSubmit
+- TextInputLayout tilName
+- TextInputLayout tilAge
+- TextInputLayout tilGender
+- TextInputLayout tilBreed
+- ImageView ivAnimalImage
+- Uri selectedImageUri
+- ActivityResultLauncher<String> pickImage
+- TextInputLayout tilVaccineDetails
+- TextInputLayout tilNotes
+- CheckBox cbVaccinated
+- ActivityResultLauncher<String> requestReadMediaImagesPermission
+- ActivityResultLauncher<String> requestReadMediaVideoPermission
+- ActivityResultLauncher<String> requestReadExternalStoragePermission
+- void checkAndRequestPermissions()
+# void onCreate(Bundle)
+- boolean validateForm()
++ void saveUser(Animal)
+}
+note left of com.example.finalprojectshiraz.AnimalDetails::ivAnimalImage
+صفة كمؤشر لهذا الكائن
+end note
+note right of com.example.finalprojectshiraz.AnimalDetails::selectedImageUri
+صفة لحفظ عنوان الصورة بعد اختيارها
+end note
+note left of com.example.finalprojectshiraz.AnimalDetails::pickImage
+ ‏كائن لطلب الصورة من الهاتف
+end note
+note right of com.example.finalprojectshiraz.AnimalDetails::requestReadMediaImagesPermission
+ مُشغّلات لطلب الأذونات
+end note
+
+note left of com.example.finalprojectshiraz.AnimalDetails::checkAndRequestPermissions()
+ دالة لفحص وطلب الأذونات
+end note
+note right of com.example.finalprojectshiraz.AnimalDetails::validateForm()
+
+     * تتحقق من صحة استخدام النموذج.
+     *
+     * @return إذا كانت كل الحقول صحيحة، فإنها صحيحة; وإلا، فإنها خاطئة.
+     
+end note
+
+class com.example.finalprojectshiraz.Signup {
+- Button btnAccount
+- TextView tvCreate
+- EditText etMail
+- FirebaseAuth auth
+# void onCreate(Bundle)
++ boolean validateFields()
++ void saveUser(MyProfile)
+}
+
+note left of com.example.finalprojectshiraz.Signup::validateFields()
+
+     * دالة للتحقق من صحة جميع الحقول في شاشة التسجيل
+     * @return true إذا كانت كل الحقول صحيحة، false إذا كانت هناك أخطاء
+     
+end note
+
+class com.example.finalprojectshiraz.LogIn {
+- TextView tvLogin
+- EditText etEnterEmail
+- Button btnLogin
+# void onCreate(Bundle)
+- boolean validateInputs()
+- boolean isValidEmail(String)
+- void signIn(String,String)
+- void updateUI(FirebaseUser)
+}
+note top of com.example.finalprojectshiraz.LogIn
+
+ * شاشة تسجيل الدخول LogIn
+ * تسمح للمستخدم بإدخال البريد الإلكتروني وكلمة المرور لتسجيل الدخول
+ * تستخدم Firebase Authentication للتحقق من صحة بيانات الدخول
+ 
+end note
+
+note left of com.example.finalprojectshiraz.LogIn::tvLogin
+ عناصر واجهة المستخدم
+end note
+
+note left of com.example.finalprojectshiraz.LogIn::onCreate(Bundle)
+
+     * دالة onCreate: تعمل عند فتح الشاشة لأول مرة
+     
+end note
+note right of com.example.finalprojectshiraz.LogIn::validateInputs()
+
+     * دالة للتحقق من صحة البيانات المدخلة
+     * @return true إذا كانت البيانات صحيحة، false إذا كانت خاطئة
+     
+end note
+note left of com.example.finalprojectshiraz.LogIn::isValidEmail(String)
+
+     * دالة بسيطة للتحقق من صحة البريد الإلكتروني
+     
+end note
+note right of com.example.finalprojectshiraz.LogIn::signIn(String,String)
+
+     * دالة لتسجيل الدخول عبر Firebase Authentication
+     
+end note
+note left of com.example.finalprojectshiraz.LogIn::updateUI(FirebaseUser)
+
+     * دالة لتحديث واجهة المستخدم بعد تسجيل الدخول
+     * @param user المستخدم الحالي أو null إذا فشل تسجيل الدخول
+     
+end note
+
+class com.example.finalprojectshiraz.HomeScreen {
+- Button btn3
+- TextView tvH
+- TextView tv13
+- Button btnReport
+- Button btnLocation
+- Button btnAdoption
+- TextView tvLocation
+- Spinner spnrAnimalType
+- FloatingActionButton fabAddAnimal
+- ListView lstvAnimals
+- MyAnimalAdapter adapterAnimals
+- ImageView settingsVector
+# void onCreate(Bundle)
+# void onResume()
+}
+note top of com.example.finalprojectshiraz.HomeScreen
+
+ * شاشة الصفحة الرئيسية HomeScreen
+ * تعرض قائمة الحيوانات، أزرار للتنقل إلى شاشات أخرى، وواجهة Edge-to-Edge
+ 
+end note
+
+note left of com.example.finalprojectshiraz.HomeScreen::fabAddAnimal
+إضافة حيوان جديد
+end note
+note right of com.example.finalprojectshiraz.HomeScreen::lstvAnimals
+القائمة اللي بتعرض الحيوانات
+end note
+note left of com.example.finalprojectshiraz.HomeScreen::adapterAnimals
+ربط البيانات بالواجهة
+end note
+
+note left of com.example.finalprojectshiraz.HomeScreen::onCreate(Bundle)
+
+     * الدالة onCreate: تُستدعى أول مرة عند فتح الشاشة
+     
+end note
+note right of com.example.finalprojectshiraz.HomeScreen::onResume()
+
+     * دالة onResume: تُستدعى عند العودة للشاشة
+     * لتحديث قائمة الحيوانات بعرض البيانات الحالية من قاعدة البيانات
+     
+end note
+
+class com.example.finalprojectshiraz.SplashScreen1 {
+- ImageView MileyImage
+- TextView tvSplash
+# void onCreate(Bundle)
+}
+
+
+class com.example.finalprojectshiraz.data.AnimalTable.LocationAdapter {
+- int itemLayout
++ View getView(int,View,ViewGroup)
+}
+
+
+interface com.example.finalprojectshiraz.data.AnimalTable.AnimalQuery {
+~ List<Animal> getAllAnimal()
+~ List<Animal> loadAllByIds(int[])
+~ void insertAll(Animal)
+~ void delete(Animal)
+~ void delete(int)
+~ void insert(Animal)
+~ void update(Animal)
+}
+note top of com.example.finalprojectshiraz.data.AnimalTable.AnimalQuery
+
+ * واجهة AnimalQuery
+ * تُعرّف العمليات الأساسية على جدول Animal في قاعدة البيانات المحلية (Room)
+ 
+end note
+
+note left of com.example.finalprojectshiraz.data.AnimalTable.AnimalQuery::getAllAnimal()
+
+     * جلب كل الحيوانات من الجدول
+     * @return قائمة تحتوي على جميع كائنات Animal
+     
+end note
+note right of com.example.finalprojectshiraz.data.AnimalTable.AnimalQuery::loadAllByIds(int[])
+
+     * جلب جميع الحيوانات حسب مجموعة من الـ IDs
+     * @param AnimalIds مصفوفة أرقام الـ keyid
+     * @return قائمة تحتوي على الحيوانات المطابقة لهذه الـ IDs
+     
+end note
+note left of com.example.finalprojectshiraz.data.AnimalTable.AnimalQuery::insertAll(Animal)
+
+     * إضافة مجموعة من الحيوانات دفعة واحدة
+     * @param animals مصفوفة من كائنات Animal
+     
+end note
+note right of com.example.finalprojectshiraz.data.AnimalTable.AnimalQuery::delete(Animal)
+
+     * حذف حيوان معين باستخدام الكائن
+     * @param animal كائن Animal المراد حذفه
+     
+end note
+note left of com.example.finalprojectshiraz.data.AnimalTable.AnimalQuery::delete(int)
+
+     * حذف حيوان باستخدام الـ ID
+     * @param id رقم الـ keyid الخاص بالحيوان
+     
+end note
+note right of com.example.finalprojectshiraz.data.AnimalTable.AnimalQuery::insert(Animal)
+
+     * إدراج حيوان واحد في الجدول
+     * @param animal كائن Animal المراد إضافته
+     
+end note
+note left of com.example.finalprojectshiraz.data.AnimalTable.AnimalQuery::update(Animal)
+
+     * تحديث بيانات حيوان موجود في الجدول
+     * @param animals كائن Animal يحتوي على البيانات الجديدة
+     
+end note
+
+interface com.example.finalprojectshiraz.data.usersTable.MyProfileQuery {
+~ List<MyProfile> getAll()
+~ List<MyProfile> loadAllByIds(int[])
+~ MyProfile checkEmailPassw(String,String)
+~ MyProfile checkEmail(String)
+~ void insertAll(MyProfile)
+~ void delete(MyProfile)
+~ void insert(MyProfile)
+~ void update(MyProfile)
+}
+note left of com.example.finalprojectshiraz.data.usersTable.MyProfileQuery::checkEmailPassw(String,String)
+هل المستعمل موجود حسب الايميل وكلمة السر
+end note
+note right of com.example.finalprojectshiraz.data.usersTable.MyProfileQuery::checkEmail(String)
+فحص هل الايميل موجود من قبل
+end note
+
+class com.example.finalprojectshiraz.Adoption {
+# void onCreate(Bundle)
+}
+
+class com.example.finalprojectshiraz.data.usersTable.MyProfile {
+~ String userId
++ long keyid
++ String fullName
++ String email
++ String phone
++ String passw
++ void setPassw(String)
++ String getPhone()
++ void setPhone(String)
++ String getEmail()
++ void setEmail(String)
++ String toString()
++ long getKeyid()
++ void setKeyid(long)
++ String getFullName()
++ void setFullName(String)
++ void setMail(String)
++ void setPass(String)
++ String getPassw()
++ void setUserId(String)
++ String getUserId()
+}
+note left of com.example.finalprojectshiraz.data.usersTable.MyProfile::email
+بحالة لم يتم اعطاء اسم للعامود يكون اسم الصفه هو اسم العامود
+end note
+
+
+class com.example.finalprojectshiraz.Settings {
+# void onCreate(Bundle)
+}
+
+class com.example.finalprojectshiraz.Map {
+# void onCreate(Bundle)
+}
+
+class com.example.finalprojectshiraz.Profile {
+# void onCreate(Bundle)
++ void setPass(String)
++ void setFullName(String)
+}
+
+class com.example.finalprojectshiraz.data.AnimalTable.Animal {
++ long id
++ String name
++ String type
++ String breed
++ String gender
++ String age
++ String color
++ String size
++ String location
++ String image
++ String description
++ String status
++ String keyid
++ String toString()
++ String getName()
++ void setName(String)
++ String getType()
++ void setType(String)
++ String getBreed()
++ void setBreed(String)
++ String getGender()
++ void setGender(String)
++ String getAge()
++ void setAge(String)
++ String getColor()
++ void setColor(String)
++ String getSize()
++ void setSize(String)
++ String getLocation()
++ void setLocation(String)
++ String getImage()
++ void setImage(String)
++ String getDescription()
++ void setDescription(String)
++ String getStatus()
++ void setStatus(String)
++ String getKeyid()
++ void setKeyid(String)
+}
+
+
+
+
+androidx.appcompat.app.AppCompatActivity <|-- com.example.finalprojectshiraz.Report
+androidx.room.RoomDatabase <|-- com.example.finalprojectshiraz.data.AppDatabase
+android.widget.ArrayAdapter <|-- com.example.finalprojectshiraz.data.AnimalTable.MyAnimalAdapter
+androidx.appcompat.app.AppCompatActivity <|-- com.example.finalprojectshiraz.AnimalDetails
+androidx.appcompat.app.AppCompatActivity <|-- com.example.finalprojectshiraz.Signup
+androidx.appcompat.app.AppCompatActivity <|-- com.example.finalprojectshiraz.LogIn
+androidx.appcompat.app.AppCompatActivity <|-- com.example.finalprojectshiraz.HomeScreen
+androidx.appcompat.app.AppCompatActivity <|-- com.example.finalprojectshiraz.SplashScreen1
+android.widget.ArrayAdapter <|-- com.example.finalprojectshiraz.data.AnimalTable.LocationAdapter
+androidx.appcompat.app.AppCompatActivity <|-- com.example.finalprojectshiraz.Adoption
+androidx.appcompat.app.AppCompatActivity <|-- com.example.finalprojectshiraz.Settings
+androidx.appcompat.app.AppCompatActivity <|-- com.example.finalprojectshiraz.Map
+androidx.appcompat.app.AppCompatActivity <|-- com.example.finalprojectshiraz.Profile
+@enduml
