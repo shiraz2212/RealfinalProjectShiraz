@@ -6,6 +6,7 @@ import static android.content.ContentValues.TAG;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -30,6 +31,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 // استيراد كلاس Animal (يمثل جدول في قاعدة البيانات المحلية)
+import com.example.finalprojectshiraz.data.AnimalTable.AirPlaneReceiver;
 import com.example.finalprojectshiraz.data.AnimalTable.Animal;
 
 // استيراد قاعدة البيانات المحلية Room
@@ -49,8 +51,9 @@ import com.google.firebase.database.FirebaseDatabase;
  * شاشة إدخال تفاصيل الحيوان
  */
 public class AnimalDetails extends AppCompatActivity {
-
-    // زر الإرسال
+    //בונים תכונה מטיפוס AirPlaneReceiver
+   private AirPlaneReceiver systemEventIsReceiver;
+    //   زر الارسال او الاضافة
     private Button btnSubmit;
 
     // حقول إدخال البيانات الأساسية
@@ -150,6 +153,7 @@ public class AnimalDetails extends AppCompatActivity {
                 new ActivityResultContracts.GetContent(),
                 new ActivityResultCallback<Uri>() {
                     @Override
+
                     public void onActivityResult(Uri result) {
 
                         // إذا تم اختيار صورة
@@ -198,7 +202,7 @@ public class AnimalDetails extends AppCompatActivity {
 
         requestReadExternalStoragePermission =
                 registerForActivityResult(
-                        new ActivityResultContracts.RequestPermission(),
+                        new ActivityResultContracts.RequestPermission(),//استعملناها لاحتيار الصورة من الهاتف
                         isGranted -> {
 
                             if (isGranted) {
@@ -226,7 +230,6 @@ public class AnimalDetails extends AppCompatActivity {
 
         // عند الضغط على زر الإرسال
         btnSubmit.setOnClickListener(v -> {
-
             // التحقق من صحة البيانات
             if (validateForm()) {
 
@@ -238,6 +241,9 @@ public class AnimalDetails extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        // initialize the receiver-تهيئةاو بناءالريسيفر
+        systemEventIsReceiver = new AirPlaneReceiver(btnSubmit);//هاد بنيناه خارج الزر لانه إذا رجعت للشاشة أو حتى عند أول تشغيل، systemEventIsReceiver = null → رح يطلع خطأ Crash.
+
     }
 
     /**
@@ -305,6 +311,7 @@ public class AnimalDetails extends AppCompatActivity {
 
     /**
      * حفظ الحيوان في Firebase
+
      */
     public void saveUser(Animal miley) {
 
@@ -348,4 +355,25 @@ public class AnimalDetails extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 });
     }
+    // 2. Register it in onStart (when the activity becomes visible)
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Register the receiver
+        IntentFilter filter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        registerReceiver(systemEventIsReceiver, filter);
+
+
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // 3. Unregister it in onStop (when the activity becomes invisible)
+        unregisterReceiver(systemEventIsReceiver);
+
+
+    }
+
 }
