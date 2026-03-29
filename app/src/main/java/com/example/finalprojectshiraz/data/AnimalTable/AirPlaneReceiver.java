@@ -12,6 +12,10 @@ public class AirPlaneReceiver extends BroadcastReceiver {
         save=btnAddTask;
     }
 
+    public  AirPlaneReceiver()
+    {
+
+    }
     @Override
     public void onReceive(Context context, Intent intent) {
         // TODO: This method is called when the BroadcastReceiver is receiving

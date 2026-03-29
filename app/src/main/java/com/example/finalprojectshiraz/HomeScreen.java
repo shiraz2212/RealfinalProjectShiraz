@@ -144,9 +144,9 @@ public class HomeScreen extends AppCompatActivity {
          * عند الضغط على أيقونة الإعدادات
          */
         settingsVector.setOnClickListener(view -> {
-            Intent intent =
-                    new Intent(HomeScreen.this, Settings.class);
-            startActivity(intent);
+//            Intent intent =
+//                    new Intent(HomeScreen.this, Settings.class);
+//            startActivity(intent);
         });
     }
 

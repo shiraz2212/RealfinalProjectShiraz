@@ -19,7 +19,7 @@ public class Adoption extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) { // أول دالة يتم تنفيذها عند فتح الشاشة
         super.onCreate(savedInstanceState);//استدعاء دالة الأب - ضروري حتى يجهّز النظام الشاشة بشكل صحيح
         EdgeToEdge.enable(this);//يفعّل العرض بكامل الشاشة
-        setContentView(R.layout.Adoption);//ربط هذه الشاشة بملف التصميم XML
+        setContentView(R.layout.activity_adoption);//ربط هذه الشاشة بملف التصميم XML
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> { //الهدف: منع تداخل المحتوى مع أزرار النظام
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());// -حصل على أبعاد شريط الحالة وشريط التنقل
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);// ضيف Padding حسب أبعاد النظام حتى لا يغطي شريط النظام محتوى الشاشة

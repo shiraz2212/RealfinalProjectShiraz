@@ -191,20 +191,20 @@ public class MyAnimalAdapter extends ArrayAdapter<Animal>
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
 
-                if(menuItem.getItemId()==R.id.mnAddTask){
-                    // هنا نكتب رد الفعل لاختيار هذا العنصر من القائمة
-                    Toast.makeText(getContext(), "Add", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(getContext(), AnimalDetails.class);
-                    getContext().startActivity(i);
-                    startActivity(i);
+//                if(menuItem.getItemId()==R.id.mnAddTask){
+//                    // هنا نكتب رد الفعل لاختيار هذا العنصر من القائمة
+//                    Toast.makeText(getContext(), "Add", Toast.LENGTH_SHORT).show();
+//                    Intent i = new Intent(getContext(), AnimalDetails.class);
+//                    getContext().startActivity(i);
+//                    startActivity(i);
+//                }
+
+                if(menuItem.getItemId()==R.id.del){
+                    Toast.makeText(getContext(), "Delete", Toast.LENGTH_SHORT).show();
                 }
 
-                if(menuItem.getItemId()==R.id.mnDelete){
-                    Toast.makeText(MainActivity.this, "Delete", Toast.LENGTH_SHORT).show();
-                }
-
-                if(menuItem.getItemId()==R.id.mnEdit){
-                    Toast.makeText(MainActivity.this, "Edit", Toast.LENGTH_SHORT).show();
+                if(menuItem.getItemId()==R.id.edit){
+                    Toast.makeText(getContext(), "Edit", Toast.LENGTH_SHORT).show();
                 }
 
                 return true;
