@@ -12,7 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-/**
+/** מاشتغل
  * شاشة البداية SplashScreen1
  * تعرض صورة ونص عند فتح التطبيق لأول مرة
  * ثم تنتقل تلقائيًا إلى شاشة تسجيل الدخول LogIn بعد مدة قصيرة
