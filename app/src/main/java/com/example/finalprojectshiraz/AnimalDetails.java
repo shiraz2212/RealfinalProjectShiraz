@@ -73,7 +73,6 @@ public class AnimalDetails extends AppCompatActivity {
 
     // حقول إضافية
     private TextInputLayout tilVaccineDetails;
-    private TextInputLayout tilNotes;
     private CheckBox cbVaccinated;
 
     // مشغلات طلب الأذونات
@@ -225,7 +224,6 @@ public class AnimalDetails extends AppCompatActivity {
         tilGender = findViewById(R.id.tilGender);
         tilBreed = findViewById(R.id.tilBreed);
         tilVaccineDetails = findViewById(R.id.tilVaccineDetails);
-        tilNotes = findViewById(R.id.tilNotes);
         cbVaccinated = findViewById(R.id.cbVaccinated);
 
         // عند الضغط على زر الإرسال

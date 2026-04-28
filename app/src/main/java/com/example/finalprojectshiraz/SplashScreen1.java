@@ -36,7 +36,7 @@ public class SplashScreen1 extends AppCompatActivity {
         EdgeToEdge.enable(this);
 
         // ربط الشاشة بملف XML
-        setContentView(R.layout.activity_splah_screen1);
+        setContentView(R.layout.activity_splash_screen1);
 
         // تأخير لمدة 3 ثواني ثم الانتقال إلى شاشة تسجيل الدخول
         new android.os.Handler().postDelayed(() -> {

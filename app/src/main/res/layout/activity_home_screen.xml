@@ -5,107 +5,84 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/baby_pink"
     tools:context=".HomeScreen">
+
+    <!-- Header Section -->
+    <ImageView
+        android:id="@+id/ivHomeLogo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_heart_paw" />
 
     <TextView
         android:id="@+id/tvH"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="135dp"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="185dp"
-        android:gravity="center"
-        android:text="Home"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/settingsVector"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/etSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="4dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Search"
-        app:layout_constraintEnd_toEndOf="@+id/search"
-        app:layout_constraintTop_toBottomOf="@+id/tvH"
-        tools:ignore="MissingConstraints" />
-
-    <SearchView
-        android:id="@+id/search"
-        android:layout_width="55dp"
-        android:layout_height="42dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toEndOf="@+id/tvH"
-        app:layout_constraintTop_toTopOf="@+id/etSearch"
-        tools:ignore="MissingConstraints" />
+        android:text="Home"
+        android:textColor="@color/deep_pink"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ivHomeLogo"
+        app:layout_constraintStart_toEndOf="@+id/ivHomeLogo"
+        app:layout_constraintTop_toTopOf="@+id/ivHomeLogo" />
 
-    <EditText
-        android:id="@+id/etText13"
-        android:layout_width="442dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginBottom="50dp"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/btnReport"
-        app:layout_constraintTop_toTopOf="@+id/btn3"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-25dp" />
-
-    <Button
-        android:id="@+id/btn3"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="64dp"
-        android:background="@drawable/circular_button"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:padding="0dp"
-        android:text="+"
-        android:textAlignment="center"
-        android:textColor="#F4D9D9"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAdoption"
+    <ImageView
+        android:id="@+id/settingsVector"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvH"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="@+id/tvH"
+        app:srcCompat="@drawable/baseline_settings_24"
+        app:tint="@color/deep_pink" />
 
-    <Button
-        android:id="@+id/btnReport"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <!-- Search Section -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/searchCard"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
-        android:text="Report"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnLocation"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivHomeLogo">
 
-    <Button
-        android:id="@+id/btnLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="29dp"
-        android:layout_marginBottom="88dp"
-        android:text="Location"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnReport" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
-    <Button
-        android:id="@+id/btnAdoption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="37dp"
-        android:text="Adoption"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnLocation"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <SearchView
+                android:id="@+id/search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:iconifiedByDefault="false"
+                android:queryHint="Search animals..."
+                android:searchIcon="@null" />
 
+            <!-- keeping original search EditText for compatibility if needed -->
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- List Section -->
     <ListView
         android:id="@+id/lstvAnimals"
         android:layout_width="0dp"
@@ -113,23 +90,76 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:divider="@android:color/transparent"
-        android:dividerHeight="8dp"
+        android:dividerHeight="12dp"
+        android:padding="8dp"
+        android:clipToPadding="false"
         app:layout_constraintBottom_toTopOf="@+id/btn3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etSearch" />
-    <ImageView
-        android:id="@+id/settingsVector"
+        app:layout_constraintTop_toBottomOf="@+id/searchCard" />
+
+    <!-- Action Buttons -->
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/circular_button"
+        android:text="+"
+        android:textColor="@color/baby_pink"
+        android:textSize="36sp"
+        app:backgroundTint="@color/deep_pink"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btnLocation"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:text="Location"
+            android:textColor="@color/deep_pink" />
+
+        <Button
+            android:id="@+id/btnAdoption"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:text="Adoption"
+            android:textColor="@color/deep_pink" />
+
+        <!-- Hidden button for compatibility -->
+        <Button
+            android:id="@+id/btnReport"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <!-- Hidden EditText to satisfy existing ID references if needed -->
+    <EditText
+        android:id="@+id/etText13"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="29dp"
-        android:layout_marginEnd="76dp"
-        android:layout_marginBottom="63dp"
-        app:layout_constraintBottom_toTopOf="@+id/lstvAnimals"
-        app:layout_constraintEnd_toStartOf="@+id/tvH"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_settings_24" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

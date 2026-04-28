@@ -4,13 +4,10 @@ package com.example.finalprojectshiraz;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 // لتفعيل عرض Edge-To-Edge (الشاشة كاملة)
 import androidx.activity.EdgeToEdge;
@@ -28,34 +25,23 @@ import com.example.finalprojectshiraz.data.AnimalTable.MyAnimalAdapter;
 // استيراد قاعدة البيانات المحلية Room
 import com.example.finalprojectshiraz.data.AppDatabase;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.List;
 
 /**
  * شاشة الصفحة الرئيسية HomeScreen
  * وظيفتها:
  * - عرض قائمة الحيوانات
- * - التنقل بين الشاشات (إضافة، تبني، تقارير، إعدادات)
+ * - التنقل بين الشاشات (إضافة، تبني، إعدادات)
  */
 public class HomeScreen extends AppCompatActivity {
 
     // أزرار التنقل
     private Button btn3;          // زر إضافة حيوان
-    private Button btnReport;     // زر التقارير
     private Button btnLocation;   // زر الموقع (غير مستخدم حالياً)
     private Button btnAdoption;   // زر التبني
 
     // عناصر نصية
     private TextView tvH;
-    private TextView tv13;
-    private TextView tvLocation;
-
-    // قائمة اختيار نوع الحيوان (غير مستخدمة حالياً)
-    private Spinner spnrAnimalType;
-
-    // زر عائم لإضافة حيوان (غير مستخدم حالياً)
-    private FloatingActionButton fabAddAnimal;
 
     // ListView لعرض الحيوانات
     private ListView lstvAnimals;
@@ -86,7 +72,7 @@ public class HomeScreen extends AppCompatActivity {
         lstvAnimals = findViewById(R.id.lstvAnimals);
 
         // إنشاء Adapter جديد
-        adapterAnimals = new MyAnimalAdapter(this, R.layout.task_item_layout);
+        adapterAnimals = new MyAnimalAdapter(this, R.layout.animal_item_layout);
 
         // ربط الـ Adapter بالـ ListView
         lstvAnimals.setAdapter(adapterAnimals);
@@ -110,7 +96,6 @@ public class HomeScreen extends AppCompatActivity {
                 });
 
         // ربط بقية عناصر الواجهة
-        btnReport = findViewById(R.id.btnReport);
         btnLocation = findViewById(R.id.btnLocation);
         btnAdoption = findViewById(R.id.btnAdoption);
         btn3 = findViewById(R.id.btn3);
@@ -126,10 +111,6 @@ public class HomeScreen extends AppCompatActivity {
                     new Intent(HomeScreen.this, AnimalDetails.class);
             startActivity(intent);
         });
-
-        /**
-         * عند الضغط على زر التقارير
-         */
 
         /**
          * عند الضغط على زر التبني

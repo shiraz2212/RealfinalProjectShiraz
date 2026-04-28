@@ -35,7 +35,7 @@ import io.reactivex.annotations.NonNull;
 
 public class Signup extends AppCompatActivity {
     private Button btnAccount, btnGoogle, btmFacebook, btnLogin2;
-    private TextView tvCreate, tvName, tvMass, tvPass, tvPhone, tvOr, tvEmail, tvSUW, tvLog;
+    private TextView tvCreate, tvName, tvMass, tvPass, tvPhone, tvOr, tvEmail, tvLog;
     private EditText etMail, etName, etPhone, etAddress, editTextText, etPassword2, emailAddress;
     private FirebaseAuth auth;
 
@@ -63,15 +63,11 @@ public class Signup extends AppCompatActivity {
         tvPhone = findViewById(R.id.tvPhone);
         tvOr = findViewById(R.id.tvOr);
         tvEmail = findViewById(R.id.tvEmail);
-        tvSUW = findViewById(R.id.tvSUW);
         tvLog = findViewById(R.id.tvLogIn);
         etMail = findViewById(R.id.etMail);
-        tvName = findViewById(R.id.tvName);
-        tvPhone = findViewById(R.id.tvPhone);
         emailAddress = findViewById(R.id.emailAddress);
         editTextText = findViewById(R.id.editTextText);
         etPassword2 = findViewById(R.id.etPassword2);
-        emailAddress = findViewById(R.id.emailAddress);
         btnLogin2 = findViewById(R.id.btnLogin2);
 
         btnAccount = findViewById(R.id.btnAccount);
@@ -238,7 +234,3 @@ public class Signup extends AppCompatActivity {
 
 
 }
-
-
-
-
