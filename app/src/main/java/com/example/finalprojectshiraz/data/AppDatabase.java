@@ -11,7 +11,7 @@ import com.example.finalprojectshiraz.data.AnimalTable.AnimalQuery;
 import com.example.finalprojectshiraz.data.usersTable.MyProfile;
 import com.example.finalprojectshiraz.data.usersTable.MyProfileQuery;
 
-@Database(entities = {MyProfile.class, Animal.class}, version = 2)
+@Database(entities = {MyProfile.class, Animal.class}, version = 3)
 /**
  * الفئة المسؤولة عن بناء قاعدة البيانات بكل جداولها
  * وتوفر لنا كائن للتعامل مع قاعدة البيانات

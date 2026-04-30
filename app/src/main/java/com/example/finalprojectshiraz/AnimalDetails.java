@@ -1,377 +1,216 @@
-// تحديد الحزمة الخاصة بهذا الكلاس داخل المشروع
 package com.example.finalprojectshiraz;
 
-// استيراد TAG لاستخدامه في Log
-import static android.content.ContentValues.TAG;
-
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-// استيراد ميزات EdgeToEdge لجعل الشاشة تمتد للحواف
 import androidx.activity.EdgeToEdge;
-
-// لاستقبال نتيجة اختيار صورة أو طلب إذن
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+import androidx.core.app.ActivityCompat;
 
-// استيراد كلاس Animal (يمثل جدول في قاعدة البيانات المحلية)
 import com.example.finalprojectshiraz.data.AnimalTable.AirPlaneReceiver;
 import com.example.finalprojectshiraz.data.AnimalTable.Animal;
-
-// استيراد قاعدة البيانات المحلية Room
 import com.example.finalprojectshiraz.data.AppDatabase;
-
-import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
-
-// عناصر الإدخال الحديثة من Material Design
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-
-// استيراد Firebase Realtime Database
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
-/**
- * شاشة إدخال تفاصيل الحيوان
- */
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
+
 public class AnimalDetails extends AppCompatActivity {
-    //בונים תכונה מטיפוס AirPlaneReceiver
-   private AirPlaneReceiver systemEventIsReceiver;
-    //   زر الارسال او الاضافة
+    private AirPlaneReceiver systemEventIsReceiver;
     private Button btnSubmit;
-
-    // حقول إدخال البيانات الأساسية
-    private TextInputLayout tilName;
-    private TextInputLayout tilAge;
-    private TextInputLayout tilGender;
-    private TextInputLayout tilBreed;
-
-    // عرض صورة الحيوان
+    private TextInputLayout tilName, tilAge, tilGender, tilBreed, tilLocation;
+    private TextInputEditText etLocation;
     private ImageView ivAnimalImage;
-
-    // لتخزين رابط الصورة المختارة
     private Uri selectedImageUri;
-
-    // كائن مسؤول عن فتح معرض الصور
     private ActivityResultLauncher<String> pickImage;
-
-    // حقول إضافية
-    private TextInputLayout tilVaccineDetails;
-    private CheckBox cbVaccinated;
-
-    // مشغلات طلب الأذونات
-    private ActivityResultLauncher<String> requestReadMediaImagesPermission;
-    private ActivityResultLauncher<String> requestReadMediaVideoPermission;
-    private ActivityResultLauncher<String> requestReadExternalStoragePermission;
-
-    /**
-     * فحص وطلب الأذونات حسب إصدار أندرويد
-     */
-
-// دالة لفحص وطلب الأذونات
-    private void checkAndRequestPermissions() {
-        // فحص وطلب إذن READ_MEDIA_IMAGES (للإصدارات الحديثة)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // أندرويد 13+
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_MEDIA_IMAGES)
-                    != PackageManager.PERMISSION_GRANTED) {
-                requestReadMediaImagesPermission.launch(android.Manifest.permission.READ_MEDIA_IMAGES);
-            } else {
-                Log.d(TAG, "READ_MEDIA_IMAGES permission already granted");
-                Toast.makeText(this, "إذن قراءة الصور ممنوح بالفعل", Toast.LENGTH_SHORT).show();
-            }
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) { // أندرويد 10 و 11 و 12// على هذه الإصدارات، READ_EXTERNAL_STORAGE له سلوك مختلف
-            // إذا كنت تستخدم Scoped Storage بشكل صحيح، قد لا تحتاج إلى هذا الإذن
-            // ولكن إذا كنت تحتاج إلى الوصول إلى جميع الصور، فقد تحتاج إلى READ_EXTERNAL_STORAGE
-            // في هذا المثال، سنفحص READ_EXTERNAL_STORAGE للإصدارات الأقدم من 13
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                requestReadExternalStoragePermission.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE);
-            } else {
-                Log.d(TAG, "READ_EXTERNAL_STORAGE permission already granted (for older versions)");
-                Toast.makeText(this, "إذن قراءة التخزين ممنوح بالفعل (للإصدارات الأقدم)", Toast.LENGTH_SHORT).show();
-            }
-        } else { // أندرويد 9 والإصدارات الأقدم
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                requestReadExternalStoragePermission.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE);
-            } else {
-                Log.d(TAG, "READ_EXTERNAL_STORAGE permission already granted (for older versions)");
-                Toast.makeText(this, "إذن قراءة التخزين ممنوح بالفعل (للإصدارات الأقدم)", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-
-        // فحص وطلب إذن READ_MEDIA_VIDEO (للإصدارات الحديثة)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // أندرويد 13+
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_MEDIA_VIDEO)
-                    != PackageManager.PERMISSION_GRANTED) {
-                requestReadMediaVideoPermission.launch(android.Manifest.permission.READ_MEDIA_VIDEO);
-            } else {
-                Log.d(TAG, "READ_MEDIA_VIDEO permission already granted");
-                Toast.makeText(this, "إذن قراءة الفيديو ممنوح بالفعل", Toast.LENGTH_SHORT).show();
-            }
-        }// ملاحظة: إذن INTERNET لا يحتاج إلى فحص أو
-    }
-
-
-
-
+    private FusedLocationProviderClient fusedLocationClient;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
-        // تفعيل العرض بالحواف
         EdgeToEdge.enable(this);
-
-        // ربط ملف التصميم
         setContentView(R.layout.activity_animal_details);
 
-        /**
-         * تهيئة مشغل اختيار الصورة
-         */
-        pickImage = registerForActivityResult(
-                new ActivityResultContracts.GetContent(),
-                new ActivityResultCallback<Uri>() {
-                    @Override
-
-                    public void onActivityResult(Uri result) {
-
-                        // إذا تم اختيار صورة
-                        if (result != null) {
-
-                            // حفظ رابط الصورة
-                            selectedImageUri = result;
-
-                            // عرض الصورة في واجهة المستخدم
-                            ivAnimalImage.setImageURI(result);
-                            ivAnimalImage.setVisibility(View.VISIBLE);
-                        }
-                    }
-                });
-
-
-        ivAnimalImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pickImage.launch("image/*"); // Launch the image picker
-            }
-        });
-
-
-
-        /**
-         * تهيئة مشغلات طلب الأذونات
-         */
-        requestReadMediaImagesPermission =
-                registerForActivityResult(
-                        new ActivityResultContracts.RequestPermission(),
-                        isGranted -> {
-
-                            if (isGranted) {
-                                // عرض رسالة نجاح
-                                Toast.makeText(this,
-                                        "تم منح إذن قراءة الصور",
-                                        Toast.LENGTH_SHORT).show();
-                            } else {
-                                // عرض رسالة رفض
-                                Toast.makeText(this,
-                                        "تم رفض إذن قراءة الصور",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
-        requestReadExternalStoragePermission =
-                registerForActivityResult(
-                        new ActivityResultContracts.RequestPermission(),//استعملناها لاحتيار الصورة من الهاتف
-                        isGranted -> {
-
-                            if (isGranted) {
-                                Toast.makeText(this,
-                                        "تم منح إذن التخزين",
-                                        Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(this,
-                                        "تم رفض إذن التخزين",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
-        /**
-         * ربط عناصر الواجهة بالكود
-         */
         btnSubmit = findViewById(R.id.btnSubmit);
         tilName = findViewById(R.id.tilName);
         tilAge = findViewById(R.id.tilAge);
         tilGender = findViewById(R.id.tilGender);
         tilBreed = findViewById(R.id.tilBreed);
-        tilVaccineDetails = findViewById(R.id.tilVaccineDetails);
-        cbVaccinated = findViewById(R.id.cbVaccinated);
+        tilLocation = findViewById(R.id.tilLocation);
+        etLocation = findViewById(R.id.etLocation);
+        ivAnimalImage = findViewById(R.id.ivAnimalImage);
 
-        // عند الضغط على زر الإرسال
-        btnSubmit.setOnClickListener(v -> {
-            // التحقق من صحة البيانات
-            if (validateForm()) {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-                // الانتقال للشاشة الرئيسية
-                Intent intent = new Intent(
-                        AnimalDetails.this,
-                        HomeScreen.class);
-
-                startActivity(intent);
+        pickImage = registerForActivityResult(new ActivityResultContracts.GetContent(), result -> {
+            if (result != null) {
+                selectedImageUri = result;
+                ivAnimalImage.setImageURI(result);
+                ivAnimalImage.setVisibility(View.VISIBLE);
             }
         });
-        // initialize the receiver-تهيئةاو بناءالريسيفر
-        systemEventIsReceiver = new AirPlaneReceiver(btnSubmit);//هاد بنيناه خارج الزر لانه إذا رجعت للشاشة أو حتى عند أول تشغيل، systemEventIsReceiver = null → رح يطلع خطأ Crash.
 
+        ivAnimalImage.setOnClickListener(v -> pickImage.launch("image/*"));
+
+        tilLocation.setEndIconOnClickListener(v -> {
+            getLastLocation();
+        });
+
+        btnSubmit.setOnClickListener(v -> validateAndSave());
+
+        systemEventIsReceiver = new AirPlaneReceiver(btnSubmit);
     }
 
-    /**
-     * التحقق من صحة الحقول
-     */
-    private boolean validateForm() {
+    private void getLastLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
+            return;
+        }
+        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+            if (location != null) {
+                updateLocationUI(location);
+            } else {
+                Toast.makeText(AnimalDetails.this, "Unable to find location", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
-        boolean isValid = true;
+    private void updateLocationUI(Location location) {
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+            if (addresses != null && !addresses.isEmpty()) {
+                String address = addresses.get(0).getAddressLine(0);
+                etLocation.setText(address);
+            } else {
+                etLocation.setText(location.getLatitude() + ", " + location.getLongitude());
+            }
+        } catch (IOException e) {
+            etLocation.setText(location.getLatitude() + ", " + location.getLongitude());
+        }
+    }
 
-        // استخراج البيانات من الحقول
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 100) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getLastLocation();
+            } else {
+                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public String convertImageToString(Uri uri) {
+        if (uri == null) return "";
+        InputStream inputStream = null;
+        try {
+            inputStream = getContentResolver().openInputStream(uri);
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+            if (bitmap == null) return "";
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, outputStream);
+            byte[] imageBytes = outputStream.toByteArray();
+            return Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        } catch (FileNotFoundException e) {
+            return "";
+        }
+    }
+
+    private void validateAndSave() {
         String name = tilName.getEditText().getText().toString().trim();
         String age = tilAge.getEditText().getText().toString().trim();
-        String gender = tilGender.getEditText().getText().toString().trim();
-        String breed = tilBreed.getEditText().getText().toString().trim();
+        String location = etLocation.getText().toString().trim();
 
-        // التحقق من كل حقل
-        if (name.isEmpty()) {
-            tilName.setError("Name is required");
-            isValid = false;
-        } else {
-            tilName.setError(null);
+        if (name.isEmpty() || age.isEmpty()) {
+            Toast.makeText(this, "يرجى تعبئة الحقول الأساسية", Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        if (age.isEmpty()) {
-            tilAge.setError("Age is required");
-            isValid = false;
-        } else {
-            tilAge.setError(null);
-        }
+        Animal a = new Animal();
+        a.setName(name);
+        a.setAge(age);
+        a.setGender(tilGender.getEditText().getText().toString().trim());
+        a.setBreed(tilBreed.getEditText().getText().toString().trim());
+        a.setLocation(location.isEmpty() ? "N/A" : location);
+        a.setImage(convertImageToString(selectedImageUri));
 
-        if (gender.isEmpty()) {
-            tilGender.setError("Gender is required");
-            isValid = false;
-        } else {
-            tilGender.setError(null);
-        }
-
-        if (breed.isEmpty()) {
-            tilBreed.setError("Breed is required");
-            isValid = false;
-        } else {
-            tilBreed.setError(null);
-        }
-
-        // إذا كل البيانات صحيحة، إنشاء كائن Animal وحفظه
-        if (isValid) {
-
-            Animal a = new Animal();
-            a.setName(name);
-            a.setAge(age);
-            a.setGender(gender);
-            a.setBreed(breed);
-
-            // حفظ في قاعدة البيانات المحلية Room
-            AppDatabase.getDB(this)
-                    .animalQuery()
-                    .insert(a);
-
-            // حفظ في Firebase
-              saveUser(a);
-        }
-        // TODO: 18/03/2026  :  لازم اخلص اخر اشي بمهمة السيرفس(رقم 3.3 )
-        return isValid;
+        btnSubmit.setEnabled(false);
+        saveToFirebase(a);
     }
 
-    /**
-     * حفظ الحيوان في Firebase
+    private void saveToFirebase(Animal a) {
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("animals");
+        String key = dbRef.push().getKey();
+        a.setKeyid(key);
 
-     */
-    public void saveUser(Animal miley) {
-
-        // الحصول على مرجع قاعدة البيانات
-        DatabaseReference database =
-                FirebaseDatabase.getInstance().getReference();
-
-        // إنشاء عقدة animals
-        DatabaseReference animalsRef =
-                database.child("animals");
-
-        // إنشاء مفتاح فريد لكل حيوان
-        DatabaseReference newAnimalRef =
-                animalsRef.push();
-
-        // تخزين المفتاح داخل الكائن
-        miley.setKeyid(newAnimalRef.getKey());
-
-        // حفظ البيانات في Firebase
-        newAnimalRef.setValue(miley)
-                .addOnSuccessListener(aVoid -> {
-                    // عند النجاح
-                    Toast.makeText(this,
-                            "Succeeded to add User",
-                            Toast.LENGTH_SHORT).show();
-
+        dbRef.child(key).setValue(a).addOnSuccessListener(unused -> {
+            new Thread(() -> {
+                AppDatabase.getDB(getApplicationContext()).animalQuery().insert(a);
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "تم الحفظ بنجاح", Toast.LENGTH_SHORT).show();
                     finish();
-
-                    Log.d(TAG,
-                            "تم الحفظ بنجاح: "
-                                    + miley.getKeyid());
-                })
-                .addOnFailureListener(e -> {
-                    // عند الفشل
-                    Log.e(TAG,
-                            "خطأ في الحفظ: "
-                                    + e.getMessage());
-
-                    Toast.makeText(this,
-                            "Failed to add User",
-                            Toast.LENGTH_SHORT).show();
                 });
+            }).start();
+        }).addOnFailureListener(e -> {
+            btnSubmit.setEnabled(true);
+            Toast.makeText(this, "فشل الحفظ", Toast.LENGTH_SHORT).show();
+        });
     }
-    // 2. Register it in onStart (when the activity becomes visible)
+
     @Override
     protected void onStart() {
         super.onStart();
-        // Register the receiver
-        IntentFilter filter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
-        registerReceiver(systemEventIsReceiver, filter);
-
-
+        try {
+            IntentFilter filter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                registerReceiver(systemEventIsReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
+            } else {
+                registerReceiver(systemEventIsReceiver, filter);
+            }
+        } catch (Exception e) {}
     }
-
 
     @Override
     protected void onStop() {
         super.onStop();
-        // 3. Unregister it in onStop (when the activity becomes invisible)
-        unregisterReceiver(systemEventIsReceiver);
-
-
+        try { unregisterReceiver(systemEventIsReceiver); } catch (Exception e) {}
     }
-
 }

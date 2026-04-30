@@ -4,13 +4,16 @@ package com.example.finalprojectshiraz;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 // لتفعيل عرض Edge-To-Edge (الشاشة كاملة)
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -24,136 +27,98 @@ import com.example.finalprojectshiraz.data.AnimalTable.MyAnimalAdapter;
 
 // استيراد قاعدة البيانات المحلية Room
 import com.example.finalprojectshiraz.data.AppDatabase;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * شاشة الصفحة الرئيسية HomeScreen
- * وظيفتها:
- * - عرض قائمة الحيوانات
- * - التنقل بين الشاشات (إضافة، تبني، إعدادات)
  */
 public class HomeScreen extends AppCompatActivity {
 
-    // أزرار التنقل
     private Button btn3;          // زر إضافة حيوان
-    private Button btnLocation;   // زر الموقع (غير مستخدم حالياً)
-    private Button btnAdoption;   // زر التبني
-
-    // عناصر نصية
+    private Button btnLocation;   
+    private Button btnAdoption;   
     private TextView tvH;
-
-    // ListView لعرض الحيوانات
     private ListView lstvAnimals;
-
-    // Adapter لربط البيانات بالـ ListView
     private MyAnimalAdapter adapterAnimals;
-
-    // أيقونة الإعدادات
     private ImageView settingsVector;
 
-    /**
-     * onCreate
-     * تُستدعى أول مرة عند فتح الشاشة
-     */
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
-        // تفعيل العرض بالحواف (Edge-To-Edge)
         EdgeToEdge.enable(this);
-
-        // ربط ملف التصميم XML
         setContentView(R.layout.activity_home_screen);
 
-        // ربط الـ ListView من XML
         lstvAnimals = findViewById(R.id.lstvAnimals);
-
-        // إنشاء Adapter جديد
         adapterAnimals = new MyAnimalAdapter(this, R.layout.animal_item_layout);
-
-        // ربط الـ Adapter بالـ ListView
         lstvAnimals.setAdapter(adapterAnimals);
 
-        /**
-         * منع تداخل المحتوى مع شريط الحالة وشريط التنقل
-         */
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main),
-                (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
-                    Insets systemBars =
-                            insets.getInsets(WindowInsetsCompat.Type.systemBars());
-
-                    // إضافة Padding حسب حجم أشرطة النظام
-                    v.setPadding(systemBars.left,
-                            systemBars.top,
-                            systemBars.right,
-                            systemBars.bottom);
-
-                    return insets;
-                });
-
-        // ربط بقية عناصر الواجهة
         btnLocation = findViewById(R.id.btnLocation);
         btnAdoption = findViewById(R.id.btnAdoption);
         btn3 = findViewById(R.id.btn3);
         tvH = findViewById(R.id.tvH);
         settingsVector = findViewById(R.id.settingsVector);
 
-        /**
-         * عند الضغط على زر إضافة حيوان
-         * الانتقال إلى شاشة AnimalDetails
-         */
         btn3.setOnClickListener(view -> {
-            Intent intent =
-                    new Intent(HomeScreen.this, AnimalDetails.class);
+            Intent intent = new Intent(HomeScreen.this, AnimalDetails.class);
             startActivity(intent);
         });
 
-        /**
-         * عند الضغط على زر التبني
-         */
         btnAdoption.setOnClickListener(view -> {
-            Intent intent =
-                    new Intent(HomeScreen.this, Adoption.class);
+            Intent intent = new Intent(HomeScreen.this, Adoption.class);
             startActivity(intent);
         });
 
-        /**
-         * عند الضغط على أيقونة الإعدادات
-         */
-        settingsVector.setOnClickListener(view -> {
-//            Intent intent =
-//                    new Intent(HomeScreen.this, Settings.class);
-//            startActivity(intent);
-        });
+        // تشغيل مراقب البيانات من Firebase
+        readAnimalsFromFirebase();
     }
 
     /**
-     * onResume
-     * تُستدعى عند الرجوع إلى الشاشة
-     * لتحديث البيانات المعروضة في القائمة
+     * جلب البيانات من Firebase وتحديث القائمة تلقائياً عند أي تغيير
      */
+    private void readAnimalsFromFirebase() {
+        FirebaseDatabase.getInstance().getReference("animals")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        ArrayList<Animal> animalList = new ArrayList<>();
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            Animal a = ds.getValue(Animal.class);
+                            if (a != null) {
+                                animalList.add(a);
+                            }
+                        }
+                        // تحديث القائمة
+                        if (adapterAnimals != null) {
+                            adapterAnimals.clear();
+                            adapterAnimals.addAll(animalList);
+                            adapterAnimals.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(HomeScreen.this, "فشل جلب البيانات", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
     @Override
     protected void onResume() {
-
         super.onResume();
-
-        // جلب جميع الحيوانات من قاعدة البيانات
-        List<Animal> allAnimal =
-                AppDatabase.getDB(this)
-                        .animalQuery()
-                        .getAllAnimal();
-
-        // تنظيف البيانات القديمة من الـ Adapter
-        adapterAnimals.clear();
-
-        // إضافة البيانات الجديدة
-        adapterAnimals.addAll(allAnimal);
-
-        // تحديث العرض في ListView
-        adapterAnimals.notifyDataSetChanged();
+        // ملاحظة: قمنا بإزالة كود Room من هنا لأنه كان يمسح بيانات Firebase ويظهر بيانات قديمة بدون روابط صور.
+        // الاعتماد الآن كلياً على Firebase لضمان ظهور الصور المرفوعة حديثاً.
     }
 }
