@@ -11,6 +11,8 @@ public class Animal implements Serializable {
     @PrimaryKey(autoGenerate = true)
     public long id;
 
+    public long reminderTime;
+
     public String name;
     public String type;
     public String breed;
@@ -46,4 +48,7 @@ public class Animal implements Serializable {
 
     public String getLocation() { return location != null ? location : ""; }
     public void setLocation(String location) { this.location = location; }
+
+    public long getReminderTime() { return reminderTime; }
+    public void setReminderTime(long reminderTime) { this.reminderTime = reminderTime; }
 }

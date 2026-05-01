@@ -214,6 +214,29 @@
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilReminder"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Set Health Reminder"
+                app:boxStrokeColor="@color/deep_pink"
+                app:endIconDrawable="@android:drawable/ic_menu_today"
+                app:endIconMode="custom"
+                app:hintTextColor="@color/deep_pink"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tilVaccineDetails">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etReminder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <Button
                 android:id="@+id/btnSubmit"
                 android:layout_width="0dp"
@@ -226,7 +249,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tilVaccineDetails" />
+                app:layout_constraintTop_toBottomOf="@+id/tilReminder" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
